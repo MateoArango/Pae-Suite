@@ -1,0 +1,18 @@
+- generic [ref=e11]:
+  - generic [ref=e12]:
+    - heading "PAE - Portal" [level=1] [ref=e13]
+    - heading "Bienvenido de nuevo" [level=2] [ref=e14]
+    - paragraph [ref=e15]: Ingresa tus credenciales de acceso
+  - generic [ref=e16]:
+    - generic [ref=e20]:
+      - generic [ref=e21]: Usuario
+      - textbox [ref=e23]
+    - generic [ref=e28]:
+      - generic [ref=e29]: Contraseña
+      - textbox [ref=e31]
+      - button [ref=e33] [cursor=pointer]:
+        - img [ref=e34]: visibility_off
+    - link "¿Olvidaste tu contraseña?" [ref=e39] [cursor=pointer]:
+      - /url: /auth/forgot-password
+  - button "Iniciar sesión" [ref=e40]:
+    - generic [ref=e41]: Iniciar sesión

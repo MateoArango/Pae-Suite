@@ -1,0 +1,4 @@
+[     195ms] [INFO] [OTel] Telemetría inicializada: https://otelcollector.adacsc.co @ https://pae-beta.adacsc.co/main-D4RPEK3S.js:157
+[   14748ms] [LOG] GLOBAL CLICK: mdc-button__label @ https://pae-beta.adacsc.co/auth/login:27
+[   15039ms] [LOG] [📌 Dashboard-Coordinador] Registering alert rail template (FIRST TIME ONLY) @ https://pae-beta.adacsc.co/chunk-S7RNCLXS.js:0
+[   15044ms] [LOG] [DashboardAlertRailService] registerRailExpandedSetter invocado @ https://pae-beta.adacsc.co/chunk-XTMAG7HA.js:0

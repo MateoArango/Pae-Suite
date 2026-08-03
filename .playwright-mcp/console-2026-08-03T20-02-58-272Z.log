@@ -1,0 +1,3 @@
+[     133ms] [INFO] [OTel] Telemetría inicializada: https://otelcollector.adacsc.co @ https://pae-beta.adacsc.co/main-D4RPEK3S.js:157
+[   16263ms] [LOG] GLOBAL CLICK: mdc-button__label @ https://pae-beta.adacsc.co/auth/login:27
+[   16387ms] [ERROR] Failed to load resource: the server responded with a status of 401 () @ https://pae-beta-api.adacsc.co/v1.0/auth/login:0
