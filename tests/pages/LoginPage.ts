@@ -8,6 +8,7 @@ export class LoginPage extends BasePage {
   readonly authenticationError: Locator;
   readonly authenticatedAccount: Locator;
   readonly feedbackPopup: Locator;
+  readonly feedbackPopupImproveProcess: Locator;
   readonly feedbackPopupCloseButton: Locator;
 
   constructor(page: Page) {
@@ -34,6 +35,10 @@ export class LoginPage extends BasePage {
       name: 'Cerrar popup',
       exact: true,
     });
+    this.feedbackPopupImproveProcess = page.getByText(
+      '¿Cómo puede mejorar el proceso de registrar estudiantes?',
+      { exact: true },
+    );
   }
 
   async open(): Promise<void> {
@@ -66,6 +71,19 @@ export class LoginPage extends BasePage {
 
   async dismissFeedbackPopup(timeout = 10_000): Promise<void> {
     const appeared = await this.feedbackPopup
+      .waitFor({ state: 'visible', timeout })
+      .then(() => true)
+      .catch(() => false);
+
+    if (!appeared) {
+      return;
+    }
+
+    await this.feedbackPopupCloseButton.click();
+    await this.feedbackPopup.waitFor({ state: 'hidden' });
+  }
+    async dismissFeedbackPopupImproveProcess(timeout = 10_000): Promise<void> {
+    const appeared = await this.feedbackPopupImproveProcess
       .waitFor({ state: 'visible', timeout })
       .then(() => true)
       .catch(() => false);

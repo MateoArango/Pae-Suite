@@ -10,9 +10,9 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
 
 **Seed:** `tests/Beneficiary/seed.spec.ts`
 
-#### 1.1. BEN-BULK-001 — Import a valid workbook successfully
+#### 1.1. BEN-BULK-001 — Import a valid workbook successfully - ✅
 
-**File:** `tests/Beneficiary/bulk-import-valid-workbook.spec.ts`
+**File:** `tests/Beneficiary/importation/bulk-import-valid-workbook.spec.ts`
 
 **Steps:**
   1. From Beneficiarios, open the actions menu and select Registro masivo.
