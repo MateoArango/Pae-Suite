@@ -28,9 +28,9 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
   6. Close the summary and search for one imported document number.
     - expect: The imported beneficiary is present with the expected enrollment state and core data.
 
-#### 1.2. BEN-BULK-002 — Reject unsupported file type
+#### 1.2. BEN-BULK-002 — Reject unsupported file type - ✅
 
-**File:** `tests/Beneficiary/bulk-import-unsupported-file.spec.ts`
+**File:** `tests/Beneficiary/importation/bulk-import-unsupported-file.spec.ts`
 
 **Steps:**
   1. Open Registro masivo and attempt to choose a non-spreadsheet file.
@@ -38,29 +38,29 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
   2. Observe the validation feedback.
     - expect: A clear supported-format message is shown and no import request is sent.
 
-#### 1.3. BEN-BULK-003 — Report missing required columns
+#### 1.3. BEN-BULK-003 — Report a missing required field - ✅
 
-**File:** `tests/Beneficiary/bulk-import-missing-columns.spec.ts`
+**File:** `tests/Beneficiary/importation/bulk-import-missing-required-field.spec.ts`
 
 **Steps:**
-  1. Upload a workbook that omits one required canonical column.
-    - expect: The file can be selected without changing existing beneficiary data.
+  1. Upload a workbook where one row omits the required `grado` value.
+    - expect: The workbook is accepted and Importar beneficiarios becomes available.
   2. Start the import.
-    - expect: The result identifies the missing column clearly and imports no malformed records.
-  3. Close and reopen the bulk-registration panel.
-    - expect: The form is reset and ready for a corrected workbook.
+    - expect: The result reports `Missing required field: grado` for the malformed row.
+  3. Close the summary and search for document `521643231`.
+    - expect: `No se encontraron beneficiarios que coincidan con los filtros` confirms the malformed row was not imported.
 
-#### 1.4. BEN-BULK-004 — Report row-level invalid values without hiding valid results
+#### 1.4. BEN-BULK-004 — Report row-level invalid values - ✅
 
-**File:** `tests/Beneficiary/bulk-import-mixed-results.spec.ts`
+**File:** `tests/Beneficiary/importation/bulk-import-mixed-results.spec.ts`
 
 **Steps:**
-  1. Upload a workbook containing at least one valid row and rows with missing required values, invalid catalog codes, and malformed document values.
+  1. Upload a workbook containing valid rows and five rows with missing required values.
     - expect: The workbook is accepted for validation.
   2. Start the import and wait for completion.
-    - expect: The summary separates processed, successful, unchanged, and failed rows with actionable row-level details.
-  3. Search for the valid and invalid document numbers.
-    - expect: The documented successful rows exist and rejected rows were not partially created.
+    - expect: Total procesados is 6, Errores is 5, and each missing-field report is visible in Detalle de novedades.
+  3. Search for documents `65869700` and `11510266`.
+    - expect: The valid record is present and the malformed record returns the no-matching-beneficiaries message.
 
 #### 1.5. BEN-BULK-005 — Handle existing or repeated records deterministically
 

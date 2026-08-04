@@ -6,8 +6,6 @@ import { LoginPage } from '../pages/LoginPage';
 
 test.describe('Login Test Plan', () => {
   test('LOGIN-002 — Invalid credentials are rejected safely', async ({ page }) => {
-    const invalidUsername = 'qa.login.nonexistent';
-    const invalidPassword = 'invalid-password-LOGIN-002';
     const loginPage = new LoginPage(page);
 
     let authenticationRequestCount = 0;
@@ -20,7 +18,7 @@ test.describe('Login Test Plan', () => {
     await loginPage.open();
 
     // 1. Enter a reserved nonexistent username and a non-secret invalid password.
-    await loginPage.fillCredentials(invalidUsername, invalidPassword);
+    await loginPage.fillInvalidCredentials();
 
     // 2. Submit the form.
     const authenticationResponse =
@@ -37,7 +35,7 @@ test.describe('Login Test Plan', () => {
     expect(authenticationRequestCount).toBe(1);
     await expect(loginPage.authenticationError).toBeVisible();
     await expect(loginPage.authenticationError).not.toContainText(
-      invalidUsername,
+      loginPage.invalidUsername,
     );
 
     // 6. Verify no authenticated dashboard content is visible.
@@ -45,7 +43,7 @@ test.describe('Login Test Plan', () => {
 
     // 7. Verify the password is still masked and no credential is included in the URL.
     await expect(loginPage.passwordInput).toHaveAttribute('type', 'password');
-    expect(page.url()).not.toContain(invalidUsername);
-    expect(page.url()).not.toContain(invalidPassword);
+    expect(page.url()).not.toContain(loginPage.invalidUsername);
+    expect(page.url()).not.toContain(loginPage.invalidPassword);
   });
 });

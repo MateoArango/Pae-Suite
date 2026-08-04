@@ -1,13 +1,13 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../fixtures';
+import { LoginPage } from '../pages/LoginPage';
 
 
 test('Beneficiaries seed', async ({ page }) => {
-await page.goto('https://pae-beta.adacsc.co/auth/login?returnUrl=%2Fbeneficiaries');
-await page.locator('input[type="text"]').click();
-await page.locator('input[type="text"]').fill('desarrollo.prisma');
-await page.getByText('Contraseña', { exact: true }).click();
-await page.locator('input[type="password"]').fill('1234567890');
-await page.getByRole('button', { name: 'Iniciar sesión' }).click();
+const loginPage = new LoginPage(page);
+
+await loginPage.goto('/auth/login?returnUrl=%2Fbeneficiaries');
+await loginPage.fillValidCredentials();
+await loginPage.submitAndWaitForAuthentication();
 await page.getByRole('button', { name: 'solo_dining' }).click();
 await page.getByRole('heading', { name: 'Gabriela Fernanda Jiménez' }).click();
 await page.getByRole('button', { name: 'Editar' }).click();

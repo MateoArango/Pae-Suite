@@ -5,23 +5,19 @@ import { test, expect } from '../../fixtures';
 import { BeneficiaryPage } from '../../pages/BeneficiaryPage';
 import { LoginPage } from '../../pages/LoginPage';
 
-const workbookName = 'student-data-alright - 2 records.xlsx';
-const importedDocumentNumber = '5643231';
-const importedName = 'Luis Philips';
+const unsupportedFileName = 'error-bulk-import.txt';
 
 test.describe('Beneficiaries bulk import', () => {
-  test('BEN-BULK-001 — Import a valid workbook successfully', async ({
-    page,
-  }) => {
-    const workbookPath = path.resolve(
+  test('BEN-BULK-002 — Reject unsupported file type', async ({ page }) => {
+    const unsupportedFilePath = path.resolve(
       __dirname,
       '../../../fixtures',
-      workbookName,
+      unsupportedFileName,
     );
     const loginPage = new LoginPage(page);
     const beneficiaryPage = new BeneficiaryPage(page);
 
-    await loginPage.goto('/auth/login');
+    await loginPage.open();
     await loginPage.fillValidCredentials();
     const authenticationResponse =
       await loginPage.submitAndWaitForAuthentication();
@@ -36,23 +32,21 @@ test.describe('Beneficiaries bulk import', () => {
     await expect(beneficiaryPage.bulkRegistrationPanel).toBeVisible();
     await expect(beneficiaryPage.uploader).toBeVisible();
 
-    await beneficiaryPage.uploadWorkbook(workbookPath);
-    await expect(beneficiaryPage.uploader).toContainText(workbookName);
-    await expect(beneficiaryPage.importBeneficiariesButton).toBeEnabled();
+    const importRequestPromise = page
+      .waitForRequest(
+        (request) =>
+          beneficiaryPage.isBulkImportCall(
+            request.url(),
+            request.method(),
+          ),
+        { timeout: 1_000 },
+      )
+      .catch(() => null);
 
-    await beneficiaryPage.importBeneficiariesButton.click();
-    await loginPage.dismissFeedbackPopupImproveProcess(3_000);
+    await beneficiaryPage.uploadWorkbook(unsupportedFilePath);
 
-    await expect(beneficiaryPage.totalProcessedLabel).toBeVisible();
-    await expect(
-      beneficiaryPage.totalProcessedLabel.locator('..'),
-    ).toContainText('2');
-
-    await beneficiaryPage.closeSummaryButton.click();
-    await beneficiaryPage.searchByDocument(importedDocumentNumber);
-
-    await expect(
-      page.getByText(importedName, { exact: true }),
-    ).toBeVisible();
+    await expect(beneficiaryPage.unsupportedFileError).toBeVisible();
+    await expect(beneficiaryPage.importBeneficiariesButton).toBeDisabled();
+    expect(await importRequestPromise).toBeNull();
   });
 });

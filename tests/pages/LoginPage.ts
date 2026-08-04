@@ -2,6 +2,10 @@ import { Locator, Page, Response } from '@playwright/test';
 import { BasePage } from './BasePage';
 
 export class LoginPage extends BasePage {
+  private readonly validUsername = 'desarrollo.prisma';
+  private readonly validPassword = '1234567890';
+  readonly invalidUsername = 'qa.login.nonexistent';
+  readonly invalidPassword = 'invalid-password-LOGIN-002';
   readonly usernameInput: Locator;
   readonly passwordInput: Locator;
   readonly submitButton: Locator;
@@ -45,9 +49,20 @@ export class LoginPage extends BasePage {
     await this.goto('/auth/login');
   }
 
-  async fillCredentials(username: string, password: string): Promise<void> {
+  private async fillCredentials(
+    username: string,
+    password: string,
+  ): Promise<void> {
     await this.usernameInput.fill(username);
     await this.passwordInput.fill(password);
+  }
+
+  async fillValidCredentials(): Promise<void> {
+    await this.fillCredentials(this.validUsername, this.validPassword);
+  }
+
+  async fillInvalidCredentials(): Promise<void> {
+    await this.fillCredentials(this.invalidUsername, this.invalidPassword);
   }
 
   async submitAndWaitForAuthentication(): Promise<Response> {
@@ -82,7 +97,7 @@ export class LoginPage extends BasePage {
     await this.feedbackPopupCloseButton.click();
     await this.feedbackPopup.waitFor({ state: 'hidden' });
   }
-    async dismissFeedbackPopupImproveProcess(timeout = 10_000): Promise<void> {
+  async dismissFeedbackPopupImproveProcess(timeout = 10_000): Promise<void> {
     const appeared = await this.feedbackPopupImproveProcess
       .waitFor({ state: 'visible', timeout })
       .then(() => true)

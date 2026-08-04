@@ -6,13 +6,11 @@ import { LoginPage } from '../pages/LoginPage';
 
 test.describe('Login Test Plan', () => {
   test('LOGIN-007 — Authenticated session survives a reload', async ({ page }) => {
-    const username = 'desarrollo.prisma';
-    const password = '1234567890';
     const loginPage = new LoginPage(page);
 
     // 1. Log in successfully.
     await loginPage.open();
-    await loginPage.fillCredentials(username, password);
+    await loginPage.fillValidCredentials();
     const authenticationResponse =
       await loginPage.submitAndWaitForAuthentication();
     expect(authenticationResponse.ok()).toBe(true);

@@ -6,8 +6,6 @@ import { LoginPage } from '../pages/LoginPage';
 
 test.describe('Login Test Plan', () => {
   test('LOGIN-001 — Successful login redirects to the dashboard', async ({ page }) => {
-    const username = 'desarrollo.prisma';
-    const password = '1234567890';
     const loginPage = new LoginPage(page);
 
     let authenticationRequestCount = 0;
@@ -22,8 +20,8 @@ test.describe('Login Test Plan', () => {
     await expect(loginPage.usernameInput).toHaveValue('');
     await expect(loginPage.passwordInput).toHaveValue('');
 
-    // 2. Enter the valid QA username and password from secure configuration.
-    await loginPage.fillCredentials(username, password);
+    // 2. Enter the shared valid QA credentials.
+    await loginPage.fillValidCredentials();
 
     // 3. Click "Iniciar sesión".
     const authenticationResponse =

@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { Locator, Page, Response } from '@playwright/test';
 import { BasePage } from './BasePage';
 
 export class BeneficiaryPage extends BasePage {
@@ -7,11 +7,16 @@ export class BeneficiaryPage extends BasePage {
   readonly bulkRegistrationPanel: Locator;
   readonly uploader: Locator;
   readonly fileInput: Locator;
+  readonly unsupportedFileError: Locator;
+  readonly missingRequiredGradeError: Locator;
   readonly importBeneficiariesButton: Locator;
   readonly totalProcessedLabel: Locator;
+  readonly errorsLabel: Locator;
+  readonly importDetailsLabel: Locator;
   readonly closeSummaryButton: Locator;
   readonly searchButton: Locator;
   readonly searchInput: Locator;
+  readonly noMatchingBeneficiariesMessage: Locator;
   readonly buttonBeneficiaries: Locator;
 
 
@@ -28,10 +33,21 @@ export class BeneficiaryPage extends BasePage {
       '[test-id="resgister-massive-upload-file-beneficiaries"]',
     );
     this.fileInput = this.uploader.locator('input[type="file"]');
+    this.unsupportedFileError = page.getByText(
+      'Solo se admiten archivos .xlsx.',
+      { exact: true },
+    );
+    this.missingRequiredGradeError = page.locator('p').filter({
+      hasText: 'Missing required field: grado',
+    });
     this.importBeneficiariesButton = page.locator(
       '[test-id="resgister-massive-import-beneficiaries"]',
     );
     this.totalProcessedLabel = page.getByText('Total procesados', {
+      exact: true,
+    });
+    this.errorsLabel = page.getByText('Errores', { exact: true });
+    this.importDetailsLabel = page.getByText('Detalle de novedades', {
       exact: true,
     });
     this.closeSummaryButton = page.locator(
@@ -42,6 +58,10 @@ export class BeneficiaryPage extends BasePage {
     );
     this.searchInput = page.locator(
       '[test-id="interactive-searchbar-input"]',
+    );
+    this.noMatchingBeneficiariesMessage = page.getByText(
+      'No se encontraron beneficiarios que coincidan con los filtros',
+      { exact: true },
     );
 
     this.buttonBeneficiaries = page.locator(
@@ -58,9 +78,48 @@ export class BeneficiaryPage extends BasePage {
     await this.fileInput.setInputFiles(workbookPath);
   }
 
-  async searchByDocument(documentNumber: string): Promise<void> {
-    await this.searchButton.click();
+  isBulkImportCall(url: string, method: string): boolean {
+    return (
+      method === 'POST' &&
+      new URL(url).pathname === '/v1.0/beneficiaries/bulk-load'
+    );
+  }
+
+  isBeneficiarySearchCall(
+    url: string,
+    method: string,
+    documentNumber: string,
+  ): boolean {
+    const requestUrl = new URL(url);
+
+    return (
+      method === 'GET' &&
+      requestUrl.pathname ===
+        '/v1.0/beneficiaries/with-campuses-and-attendants' &&
+      requestUrl.searchParams.get('searchBar') === documentNumber
+    );
+  }
+
+  bulkImportError(message: string): Locator {
+    return this.page.locator('p').filter({ hasText: message });
+  }
+
+  async searchByDocument(documentNumber: string): Promise<Response> {
+    if (await this.searchButton.isVisible()) {
+      await this.searchButton.click();
+    }
+
+    const searchResponsePromise = this.page.waitForResponse((response) =>
+      this.isBeneficiarySearchCall(
+        response.url(),
+        response.request().method(),
+        documentNumber,
+      ),
+    );
+
     await this.searchInput.fill(documentNumber);
     await this.searchInput.press('Enter');
+
+    return searchResponsePromise;
   }
 }
