@@ -7,6 +7,8 @@ export class LoginPage extends BasePage {
   readonly submitButton: Locator;
   readonly authenticationError: Locator;
   readonly authenticatedAccount: Locator;
+  readonly feedbackPopup: Locator;
+  readonly feedbackPopupCloseButton: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -24,6 +26,14 @@ export class LoginPage extends BasePage {
       { exact: true },
     );
     this.authenticatedAccount = page.getByText('Desarrollo Prisma');
+    this.feedbackPopup = page.getByText(
+      '¿Cómo ha sido tu experiencia con el portal?',
+      { exact: true },
+    );
+    this.feedbackPopupCloseButton = page.getByRole('button', {
+      name: 'Cerrar popup',
+      exact: true,
+    });
   }
 
   async open(): Promise<void> {
@@ -52,5 +62,19 @@ export class LoginPage extends BasePage {
     return (
       method === 'POST' && new URL(url).pathname === '/v1.0/auth/login'
     );
+  }
+
+  async dismissFeedbackPopup(timeout = 10_000): Promise<void> {
+    const appeared = await this.feedbackPopup
+      .waitFor({ state: 'visible', timeout })
+      .then(() => true)
+      .catch(() => false);
+
+    if (!appeared) {
+      return;
+    }
+
+    await this.feedbackPopupCloseButton.click();
+    await this.feedbackPopup.waitFor({ state: 'hidden' });
   }
 }
