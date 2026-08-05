@@ -76,7 +76,7 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
 
 #### 1.6. BEN-BULK-006 — Cancel bulk registration without importing
 
-**File:** `tests/Beneficiary/bulk-import-cancel.spec.ts`
+**File:** `tests/Beneficiary/importation/bulk-import-cancel.spec.ts`
 
 **Steps:**
   1. Open Registro masivo and select a valid workbook.
@@ -85,6 +85,8 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
     - expect: The panel closes and no import request is sent.
   3. Reopen Registro masivo.
     - expect: The previous file selection and transient validation state are cleared.
+  4. Repeat the import with the same workbook.
+    - expect: The uploaded msg 'Completado' is displayed.
 
 ### 2. Single beneficiary registration
 

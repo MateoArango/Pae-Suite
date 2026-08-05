@@ -22,6 +22,12 @@ Update this file whenever a new automated test is created or testing exposes a p
 - Status: Implemented and passing.
 - Coverage: Successful authentication, initial dashboard state, browser reload, persistent `/dashboard` route, restored authenticated account content, and absence of the login form.
 
+### BEN-BULK-006 — Cancel bulk registration without importing
+
+- File: `tests/Beneficiary/importation/bulk-import-cancel.spec.ts`
+- Status: Implemented and passing.
+- Coverage: Valid workbook selection, cancellation before import, zero bulk-load requests, cleared upload state after reopening, and successful import of the same workbook afterward.
+
 ## Gaps and improvements
 
 ### Bulk import silently overwrites repeated document keys

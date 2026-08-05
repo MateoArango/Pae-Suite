@@ -70,7 +70,10 @@ export class BeneficiaryPage extends BasePage {
   }
 
   async openBulkRegistration(): Promise<void> {
-    await this.actionsMenuButton.click();
+    if (!(await this.bulkRegistrationButton.isVisible())) {
+      await this.actionsMenuButton.click();
+    }
+
     await this.bulkRegistrationButton.click();
   }
 
