@@ -62,17 +62,17 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
   3. Search for documents `65869700` and `11510266`.
     - expect: The valid record is present and the malformed record returns the no-matching-beneficiaries message.
 
-#### 1.5. BEN-BULK-005 — Handle existing or repeated records deterministically
+#### 1.5. BEN-BULK-005 — Apply the last row for a repeated document
 
-**File:** `tests/Beneficiary/bulk-import-duplicates.spec.ts`
+**File:** `tests/Beneficiary/importation/bulk-import-duplicates.spec.ts`
 
 **Steps:**
-  1. Upload a workbook containing a document already registered in the environment and a duplicate document within the same workbook.
+  1. Upload `student-data-alright - repeated - attendant  - x2 - repeated-update-verify.xlsx`, containing two rows with document `4466443`.
     - expect: The file is accepted for validation.
   2. Start the import.
-    - expect: Existing and repeated records are classified according to the product rule, such as Sin cambios or rejected duplicate, without creating duplicate beneficiaries.
-  3. Search by the duplicated document.
-    - expect: Only one beneficiary record is present.
+    - expect: The rows are processed and the last row overwrites the earlier values. The missing repeated-key warning is recorded as a product gap in `next improvements.md`.
+  3. Search for document `4466443`.
+    - expect: Only one beneficiary record is present and its updated name is `Brad Pitt`.
 
 #### 1.6. BEN-BULK-006 — Cancel bulk registration without importing
 

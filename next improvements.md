@@ -24,6 +24,13 @@ Update this file whenever a new automated test is created or testing exposes a p
 
 ## Gaps and improvements
 
+### Bulk import silently overwrites repeated document keys
+
+- Related scenario: `BEN-BULK-005`.
+- When two workbook rows contain the same `N-Documento`, the last row overwrites the earlier row, but the import summary does not report that the document key was repeated.
+- Product gap: users are not warned that information from an earlier row was replaced, which can cause unnoticed data loss.
+- Improvement: report each repeated `N-Documento` in `Detalle de novedades`, identify the affected workbook rows, and clearly state which row was applied.
+
 ### Authentication error accessibility
 
 - Found while validating `LOGIN-002`.
