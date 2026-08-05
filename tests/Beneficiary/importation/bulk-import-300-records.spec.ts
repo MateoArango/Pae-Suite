@@ -3,7 +3,7 @@
 
 import path from 'node:path';
 import { test, expect } from '../../fixtures';
-import { BeneficiaryPage } from '../../pages/BeneficiaryPage';
+import { BeneficiaryBulkPage } from '../../pages/BeneficiaryBulkPage';
 import { LoginPage } from '../../pages/LoginPage';
 
 const workbookName =
@@ -34,7 +34,7 @@ test.describe('Beneficiaries bulk import', () => {
       workbookName,
     );
     const loginPage = new LoginPage(page);
-    const beneficiaryPage = new BeneficiaryPage(page);
+    const beneficiaryPage = new BeneficiaryBulkPage(page);
 
     // 1. Authenticate and navigate to Beneficiarios.
     await loginPage.goto('/auth/login');

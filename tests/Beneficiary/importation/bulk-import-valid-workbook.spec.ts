@@ -2,7 +2,7 @@
 
 import path from 'node:path';
 import { test, expect } from '../../fixtures';
-import { BeneficiaryPage } from '../../pages/BeneficiaryPage';
+import { BeneficiaryBulkPage } from '../../pages/BeneficiaryBulkPage';
 import { LoginPage } from '../../pages/LoginPage';
 
 const workbookName = 'student-data-alright - 2 records.xlsx';
@@ -19,7 +19,7 @@ test.describe('Beneficiaries bulk import', () => {
       workbookName,
     );
     const loginPage = new LoginPage(page);
-    const beneficiaryPage = new BeneficiaryPage(page);
+    const beneficiaryPage = new BeneficiaryBulkPage(page);
 
     await loginPage.goto('/auth/login');
     await loginPage.fillValidCredentials();

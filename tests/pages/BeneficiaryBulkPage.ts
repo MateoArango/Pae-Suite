@@ -1,7 +1,7 @@
 import { Locator, Page, Response } from '@playwright/test';
 import { BasePage } from './BasePage';
 
-export class BeneficiaryPage extends BasePage {
+export class BeneficiaryBulkPage extends BasePage {
   readonly actionsMenuButton: Locator;
   readonly bulkRegistrationButton: Locator;
   readonly bulkRegistrationPanel: Locator;

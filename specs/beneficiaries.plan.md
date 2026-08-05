@@ -62,7 +62,7 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
   3. Search for documents `65869700` and `11510266`.
     - expect: The valid record is present and the malformed record returns the no-matching-beneficiaries message.
 
-#### 1.5. BEN-BULK-005 — Apply the last row for a repeated document
+#### 1.5. BEN-BULK-005 — Apply the last row for a repeated document ✅
 
 **File:** `tests/Beneficiary/importation/bulk-import-duplicates.spec.ts`
 
@@ -74,7 +74,7 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
   3. Search for document `4466443`.
     - expect: Only one beneficiary record is present and its updated name is `Brad Pitt`.
 
-#### 1.6. BEN-BULK-006 — Cancel bulk registration without importing
+#### 1.6. BEN-BULK-006 — Cancel bulk registration without importing ✅
 
 **File:** `tests/Beneficiary/importation/bulk-import-cancel.spec.ts`
 
@@ -88,7 +88,7 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
   4. Repeat the import with the same workbook.
     - expect: The uploaded msg 'Completado' is displayed.
 
-#### 1.7. BEN-BULK-007 — Import 300 valid records successfully
+#### 1.7. BEN-BULK-007 — Import 300 valid records successfully ✅
 
 **File:** `tests/Beneficiary/importation/bulk-import-300-records.spec.ts`
 
@@ -104,7 +104,7 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
 
 **Seed:** `tests/Beneficiary/seed.spec.ts`
 
-#### 2.1. BEN-SINGLE-001 — Register one beneficiary with valid required data
+#### 2.1. BEN-SINGLE-001 — Register one beneficiary with valid required data - ✅
 
 **File:** `tests/Beneficiary/register-single-beneficiary.spec.ts`
 
@@ -112,11 +112,11 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
   1. From Beneficiarios, open the actions menu and select Registro único.
     - expect: The Registrar estudiante form is visible.
   2. Complete all required personal and schooling fields using a unique document number and valid catalog selections.
-    - expect: Each value is retained and dependent selections become available in the correct order.
+    - expect: Each value is retained.
   3. Submit the form once and wait for the creation response.
     - expect: Exactly one successful creation request occurs and a clear success state is shown.
   4. Close the form and search by the new document number.
-    - expect: The new beneficiary appears with the entered identity data and expected enrollment status.
+    - expect: The new beneficiary appears with the entered identity data and expected not enrolled status.
 
 #### 2.2. BEN-SINGLE-002 — Validate required beneficiary fields — Button disabled and think about it
 

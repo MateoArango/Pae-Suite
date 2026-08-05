@@ -34,7 +34,20 @@ Update this file whenever a new automated test is created or testing exposes a p
 - Status: Implemented; browser execution pending.
 - Coverage: Successful 300-row bulk-load response, `Total procesados = 300`, `Errores = 0`, and 10 representative document/name searches distributed across the workbook.
 
+### BEN-SINGLE-001 — Register one beneficiary with valid required data
+
+- File: `tests/Beneficiary/register-single-beneficiary.spec.ts`
+- Status: Implemented and passing.
+- Coverage: Randomized government ID, retained required values, exactly one `POST /v1.0/beneficiaries`, `201 Created`, green success toast, beneficiary search proof, and `No enrolado` state.
+
 ## Gaps and improvements
+
+### Duplicate beneficiary document has no user feedback
+
+- Related scenario: `BEN-SINGLE-003`.
+- The application prevents creation when the government ID already exists, but no toast or validation message explains why the beneficiary was not created.
+- Product gap: the form appears not to submit successfully without telling the user that the document number is duplicated.
+- Improvement: show a visible error toast such as `Ya existe un beneficiario con el número de documento ingresado`, keep the entered values available for correction, and expose the message through an accessible `alert` or `aria-live` region.
 
 ### Bulk import silently overwrites repeated document keys
 
