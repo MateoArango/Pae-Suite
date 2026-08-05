@@ -40,7 +40,20 @@ Update this file whenever a new automated test is created or testing exposes a p
 - Status: Implemented and passing.
 - Coverage: Randomized government ID, retained required values, exactly one `POST /v1.0/beneficiaries`, `201 Created`, green success toast, beneficiary search proof, and `No enrolado` state.
 
+### BEN-SINGLE-002 — Validate required beneficiary fields
+
+- File: `tests/Beneficiary/register-beneficiary-required-fields.spec.ts`
+- Status: Implemented and passing.
+- Coverage: Empty submission, Angular invalid state on all seven required controls, zero beneficiary creation requests, and persistent form state. Fill one required field and verify his validation state is cleared.
+
 ## Gaps and improvements
+
+### Required beneficiary fields rely on color alone
+
+- Related scenario: `BEN-SINGLE-002`.
+- Empty required fields receive red invalid outlines, but no written validation message explains what must be corrected.
+- Accessibility gap: users who cannot perceive the color change may not know which fields are invalid or why submission was blocked.
+- Improvement: display `Este campo es obligatorio` for each missing value, associate it with the control through `aria-describedby`, and expose a form-level validation summary when submission fails.
 
 ### Duplicate beneficiary document has no user feedback
 

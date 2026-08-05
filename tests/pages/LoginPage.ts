@@ -17,15 +17,9 @@ export class LoginPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.usernameInput = page.locator(
-      '[test-id="auth-login-form-user-input"]',
-    );
-    this.passwordInput = page.locator(
-      '[test-id="auth-login-form-password-input"]',
-    );
-    this.submitButton = page.locator(
-      '[test-id="auth-login-form-submit-button"]',
-    );
+    this.usernameInput = page.getByTestId('auth-login-form-user-input');
+    this.passwordInput = page.getByTestId('auth-login-form-password-input');
+    this.submitButton = page.getByTestId('auth-login-form-submit-button');
     this.authenticationError = page.getByText(
       'Usuario o contraseña incorrectos',
       { exact: true },

@@ -118,7 +118,7 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
   4. Close the form and search by the new document number.
     - expect: The new beneficiary appears with the entered identity data and expected not enrolled status.
 
-#### 2.2. BEN-SINGLE-002 — Validate required beneficiary fields — Button disabled and think about it
+#### 2.2. BEN-SINGLE-002 — Validate required beneficiary fields - ✅
 
 **File:** `tests/Beneficiary/register-beneficiary-required-fields.spec.ts`
 
@@ -128,7 +128,7 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
   2. Complete one required field and submit again.
     - expect: Completed fields keep their values and only unresolved requirements remain invalid.
   3. Use keyboard navigation through invalid fields.
-    - expect: Focus is visible and reaches the first invalid field in a logical order.
+    - expect: Focus is visible and reaches the first invalid field in a logical order. Fill one required field and verify his validation state is cleared.
 
 #### 2.3. BEN-SINGLE-003 — Prevent duplicate beneficiary document
 

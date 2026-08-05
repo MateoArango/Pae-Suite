@@ -36,50 +36,48 @@ export class BeneficiarySingleForm extends BasePage {
   constructor(page: Page) {
     super(page);
 
-    this.form = page.locator(
-      '[test-id="form-beneficiaries-submit-beneficiaries"]',
+    this.form = page.getByTestId('form-beneficiaries-submit-beneficiaries');
+    this.closeButton = this.form.getByTestId(
+      'form-beneficiaries-close-dialog-beneficiaries',
     );
-    this.closeButton = this.form.locator(
-      '[test-id="form-beneficiaries-close-dialog-beneficiaries"]',
+    this.enrolmentButton = this.form.getByTestId(
+      'form-beneficiaries-open-enrolment-beneficiaries',
     );
-    this.enrolmentButton = this.form.locator(
-      '[test-id="form-beneficiaries-open-enrolment-beneficiaries"]',
+    this.firstNameInput = this.form.getByTestId(
+      'form-beneficiaries-input-first-name-beneficiaries',
     );
-    this.firstNameInput = this.form.locator(
-      '[test-id="form-beneficiaries-input-first-name-beneficiaries"]',
+    this.secondNameInput = this.form.getByTestId(
+      'form-beneficiaries-input-second-name-beneficiaries',
     );
-    this.secondNameInput = this.form.locator(
-      '[test-id="form-beneficiaries-input-second-name-beneficiaries"]',
+    this.firstLastNameInput = this.form.getByTestId(
+      'form-beneficiaries-input-first-last-name-beneficiaries',
     );
-    this.firstLastNameInput = this.form.locator(
-      '[test-id="form-beneficiaries-input-first-last-name-beneficiaries"]',
+    this.secondLastNameInput = this.form.getByTestId(
+      'form-beneficiaries-input-second-last-name-beneficiaries',
     );
-    this.secondLastNameInput = this.form.locator(
-      '[test-id="form-beneficiaries-input-second-last-name-beneficiaries"]',
+    this.documentTypeSelect = this.form.getByTestId(
+      'form-beneficiaries-select-document-type-beneficiaries',
     );
-    this.documentTypeSelect = this.form.locator(
-      '[test-id="form-beneficiaries-select-document-type-beneficiaries"]',
+    this.documentNumberInput = this.form.getByTestId(
+      'form-beneficiaries-input-document-number-beneficiaries',
     );
-    this.documentNumberInput = this.form.locator(
-      '[test-id="form-beneficiaries-input-document-number-beneficiaries"]',
+    this.academicGradeSelect = this.form.getByTestId(
+      'form-beneficiaries-select-academic-grade-beneficiaries',
     );
-    this.academicGradeSelect = this.form.locator(
-      '[test-id="form-beneficiaries-select-academic-grade-beneficiaries"]',
+    this.groupInput = this.form.getByTestId(
+      'form-beneficiaries-input-group-beneficiaries',
     );
-    this.groupInput = this.form.locator(
-      '[test-id="form-beneficiaries-input-group-beneficiaries"]',
+    this.populationTypeSelect = this.form.getByTestId(
+      'form-beneficiaries-select-population-type-beneficiaries',
     );
-    this.populationTypeSelect = this.form.locator(
-      '[test-id="form-beneficiaries-select-population-type-beneficiaries"]',
+    this.headerSaveButton = this.form.getByTestId(
+      'form-beneficiaries-save-header-new-beneficiaries',
     );
-    this.headerSaveButton = this.form.locator(
-      '[test-id="form-beneficiaries-save-header-new-beneficiaries"]',
+    this.desktopSaveButton = this.form.getByTestId(
+      'form-beneficiaries-save-desktop-beneficiaries',
     );
-    this.desktopSaveButton = this.form.locator(
-      '[test-id="form-beneficiaries-save-desktop-beneficiaries"]',
-    );
-    this.cancelButton = this.form.locator(
-      '[test-id="form-beneficiaries-cancel-desktop-beneficiaries"]',
+    this.cancelButton = this.form.getByTestId(
+      'form-beneficiaries-cancel-desktop-beneficiaries',
     );
     this.actionsMenuButton = page.getByRole('button', {
       name: 'Abrir menú de acciones',
@@ -87,15 +85,11 @@ export class BeneficiarySingleForm extends BasePage {
     this.singleRecordButton = page.getByRole('button', {
       name: 'Registro único',
     });
-    this.buttonBeneficiaries = page.locator(
-      '[test-id="sidebar-nav-item-beneficiarios"]',
+    this.buttonBeneficiaries = page.getByTestId(
+      'sidebar-nav-item-beneficiarios',
     );
-    this.searchButton = page.locator(
-      '[test-id="interactive-searchbar-open-button"]',
-    );
-    this.searchInput = page.locator(
-      '[test-id="interactive-searchbar-input"]',
-    );
+    this.searchButton = page.getByTestId('interactive-searchbar-open-button');
+    this.searchInput = page.getByTestId('interactive-searchbar-input');
   }
 
   async openSingleRegistration(): Promise<void> {
@@ -149,6 +143,10 @@ export class BeneficiarySingleForm extends BasePage {
       `Beneficiario ${firstName} ${firstLastName} creado exitosamente`,
       { exact: true },
     );
+  }
+
+  requiredFieldContainer(control: Locator): Locator {
+    return control.locator('xpath=ancestor::mat-form-field');
   }
 
   async searchByDocument(documentNumber: string): Promise<Response> {
