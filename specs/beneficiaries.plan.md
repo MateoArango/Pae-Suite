@@ -88,6 +88,18 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
   4. Repeat the import with the same workbook.
     - expect: The uploaded msg 'Completado' is displayed.
 
+#### 1.7. BEN-BULK-007 — Import 300 valid records successfully
+
+**File:** `tests/Beneficiary/importation/bulk-import-300-records.spec.ts`
+
+**Steps:**
+  1. From Beneficiarios, open Registro masivo and upload the valid 300-record workbook.
+    - expect: The selected filename is shown and Importar beneficiarios becomes available.
+  2. Submit the workbook and wait for `POST /v1.0/beneficiaries/bulk-load`.
+    - expect: The request succeeds, `Total procesados` is `300`, and `Errores` is `0`.
+  3. Search for 10 evenly distributed beneficiary documents, including the first and last workbook rows.
+    - expect: Every search succeeds and displays the expected beneficiary name.
+
 ### 2. Single beneficiary registration
 
 **Seed:** `tests/Beneficiary/seed.spec.ts`

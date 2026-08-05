@@ -28,6 +28,12 @@ Update this file whenever a new automated test is created or testing exposes a p
 - Status: Implemented and passing.
 - Coverage: Valid workbook selection, cancellation before import, zero bulk-load requests, cleared upload state after reopening, and successful import of the same workbook afterward.
 
+### BEN-BULK-007 — Import 300 valid records successfully
+
+- File: `tests/Beneficiary/importation/bulk-import-300-records.spec.ts`
+- Status: Implemented; browser execution pending.
+- Coverage: Successful 300-row bulk-load response, `Total procesados = 300`, `Errores = 0`, and 10 representative document/name searches distributed across the workbook.
+
 ## Gaps and improvements
 
 ### Bulk import silently overwrites repeated document keys
