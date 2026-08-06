@@ -1,9 +1,9 @@
 // spec: specs/beneficiaries.plan.md
 // seed: tests/Beneficiary/seed.spec.ts
 
-import { test, expect } from '../fixtures';
-import { BeneficiarySingleForm } from '../pages/BeneficiarySingleFormPage';
-import { LoginPage } from '../pages/LoginPage';
+import { test, expect } from '../../fixtures';
+import { BeneficiarySingleForm } from '../../pages/BeneficiarySingleFormPage';
+import { LoginPage } from '../../pages/LoginPage';
 
 test.describe('Single beneficiary registration', () => {
   test('BEN-SINGLE-004 — Validate document format and stale data', async ({

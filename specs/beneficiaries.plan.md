@@ -172,7 +172,7 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
   3. Change an upstream selection.
     - expect: Incompatible downstream values are cleared and must be selected again before submission.
 
-#### 2.6. BEN-SINGLE-006 — Cancel registration and handle the delayed feedback overlay — Partial
+#### 2.6. BEN-SINGLE-006 — Cancel registration and handle the delayed feedback overlay — Partial ✅
 
 **File:** `tests/Beneficiary/register-beneficiary-cancel-and-overlay.spec.ts`
 
@@ -192,19 +192,21 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
 
 **Seed:** `tests/Beneficiary/seed.spec.ts`
 
-#### 3.1. ATT-SINGLE-001 — Register one attendant with valid data
+#### 3.1. ATT-SINGLE-001 — Register one attendant with valid data - ✅
 
-**File:** `tests/Beneficiary/register-single-attendant.spec.ts`
+**File:** `tests/Beneficiary/attendant-form/register-single-attendant.spec.ts`
 
 **Steps:**
-  1. Navigate through the single-registration flow to the attendant portion for a new or selected beneficiary, according to the product workflow.
-    - expect: The attendant form is visible and clearly indicates the beneficiary being associated.
-  2. Complete all required identity, relationship, and contact fields using a unique attendant document.
+  1. Open the Acudientes panel and select Registrar.
+    - expect: The Registrar acudiente form is visible.
+  2. Complete all required identity and contact fields using a unique attendant document and numeric phone number.
     - expect: Entered values and valid catalog selections are retained.
-  3. Submit once and wait for the creation response.
-    - expect: Exactly one successful request occurs and the relationship is saved.
-  4. Open the beneficiary detail and Ver detalle acudiente titular.
-    - expect: The new attendant and expected relationship data are displayed.
+  3. Open Agregar estudiantes, select one available beneficiary, and confirm the selection.
+    - expect: The beneficiary association is accepted by the form.
+  4. Submit once and wait for `POST /v1.0/attendants`.
+    - expect: Exactly one `201 Created` response contains a numeric `data.id`, `entity: ScanServices`, and `message: Created`; `Acudiente agregado correctamente.` is displayed.
+  5. Search the Acudientes panel by the newly created attendant's full name.
+    - expect: The newly created attendant appears in the filtered list.
 
 #### 3.2. ATT-SINGLE-002 — Validate required attendant fields
 

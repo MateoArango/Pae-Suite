@@ -46,7 +46,21 @@ Update this file whenever a new automated test is created or testing exposes a p
 - Status: Implemented and passing.
 - Coverage: Empty submission, Angular invalid state on all seven required controls, zero beneficiary creation requests, and persistent form state. Fill one required field and verify his validation state is cleared.
 
+### ATT-SINGLE-001 — Register one attendant with valid data
+
+- File: `tests/Beneficiary/attendant-form/register-single-attendant.spec.ts`
+- Status: Implemented and passing in focused Chromium execution.
+- Coverage: Unique attendant identity, numeric phone, beneficiary association, exactly one `POST /v1.0/attendants`, `201 Created` response contract, success message, and attendant-panel search proof.
+
 ## Gaps and improvements
+
+### Allow attendants to share a phone number
+
+- Related scenario: `ATT-SINGLE-003`.
+- Business rule: uniqueness belongs to the attendant government document, not the phone number.
+- A valid phone number may be shared by multiple attendants and must not trigger duplicate-attendant validation.
+- Coverage improvement: create attendants with unique government documents but the same valid phone number and verify each creation succeeds.
+- Keep phone validation focused on the accepted format and length; do not imply or enforce phone-number uniqueness.
 
 ### Required beneficiary fields rely on color alone
 

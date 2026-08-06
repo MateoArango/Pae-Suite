@@ -1,10 +1,10 @@
 // spec: specs/beneficiaries.plan.md
 // seed: tests/Beneficiary/seed.spec.ts
 
-import { test, expect } from '../fixtures';
-import { BeneficiarySingleForm } from '../pages/BeneficiarySingleFormPage';
-import { LoginPage } from '../pages/LoginPage';
-import { generateGovernmentId } from '../utils/generateGovernmentId';
+import { test, expect } from '../../fixtures';
+import { BeneficiarySingleForm } from '../../pages/BeneficiarySingleFormPage';
+import { LoginPage } from '../../pages/LoginPage';
+import { generateGovernmentId } from '../../utils/generateGovernmentId';
 
 test.describe('Single beneficiary registration', () => {
   test('BEN-SINGLE-003 — Prevent duplicate beneficiary document', async ({

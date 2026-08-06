@@ -2,10 +2,10 @@
 // seed: tests/Beneficiary/seed.spec.ts
 
 import { Page } from '@playwright/test';
-import { test, expect } from '../fixtures';
-import { BeneficiarySingleForm } from '../pages/BeneficiarySingleFormPage';
-import { LoginPage } from '../pages/LoginPage';
-import { generateGovernmentId } from '../utils/generateGovernmentId';
+import { test, expect } from '../../fixtures';
+import { BeneficiarySingleForm } from '../../pages/BeneficiarySingleFormPage';
+import { LoginPage } from '../../pages/LoginPage';
+import { generateGovernmentId } from '../../utils/generateGovernmentId';
 
 async function openRegistration(page: Page): Promise<{
   beneficiaryForm: BeneficiarySingleForm;
