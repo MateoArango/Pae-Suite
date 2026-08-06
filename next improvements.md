@@ -64,6 +64,15 @@ Update this file whenever a new automated test is created or testing exposes a p
 - Product gap: the form appears not to submit successfully without telling the user that the document number is duplicated.
 - Improvement: show a visible error toast such as `Ya existe un beneficiario con el número de documento ingresado`, keep the entered values available for correction, and expose the message through an accessible `alert` or `aria-live` region.
 
+### Invalid beneficiary document fails silently
+
+- Related scenario: `BEN-SINGLE-004`.
+- File: `tests/Beneficiary/register-beneficiary-document-validation.spec.ts`.
+- Current automated coverage: CC retains numbers, CC removes non-numeric characters, NIUP accepts letters plus numbers up to 15 characters, and changing NIUP to CC sanitizes stale alphanumeric data.
+- When `´´+´+` is entered under CC, the control is sanitized to empty; Save remains enabled and clickable, but the frontend sends no beneficiary creation request.
+- Product gap: the form remains open without a field-level explanation, error toast, or backend response that tells the user why registration did not continue.
+- Improvement: show a specific document-format message, associate it with the document input, set an observable invalid state, and focus the invalid control after Save is clicked.
+
 ### Bulk import silently overwrites repeated document keys
 
 - Related scenario: `BEN-BULK-005`.

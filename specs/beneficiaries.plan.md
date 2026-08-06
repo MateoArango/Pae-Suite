@@ -140,17 +140,25 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
   2. Submit the form.
     - expect: Creation is rejected with a clear duplicate-document message and no second record is created.
 
-#### 2.4. BEN-SINGLE-004 — Validate document format and boundaries
+#### 2.4. BEN-SINGLE-004 — Validate document format and stale data - ✅
 
 **File:** `tests/Beneficiary/register-beneficiary-document-validation.spec.ts`
 
+**Covered document rules:**
+- CC accepts and retains numeric characters.
+- CC removes non-numeric characters.
+- NIUP accepts letters and numbers up to its 15-character limit.
+- Changing NIUP to CC sanitizes stale alphanumeric data according to the CC rule.
+
 **Steps:**
-  1. Exercise the document field with empty, alphabetic, whitespace-only, over-maximum, and valid boundary values appropriate to the selected document type.
-    - expect: Invalid values receive specific feedback and valid boundary values are accepted.
-  2. Change the document type after entering a value.
-    - expect: The document is revalidated under the new type and stale errors do not remain.
-  3. Attempt submission with an invalid document.
-    - expect: No creation request is sent.
+  1. Select NIUP and enter the alphanumeric value `QAutomationTeo123`.
+    - expect: NIUP accepts letters and numbers while enforcing its 15-character boundary, resulting in `QAutomationTeo1`.
+  2. Change the document type to Cédula de Ciudadanía.
+    - expect: CC removes the stale letters and retains the valid numeric remainder, `1`.
+  3. Enter `´´+´+` as the CC document and complete the remaining required fields.
+    - expect: CC sanitizes the invalid characters to an empty, invalid field while the Save button remains enabled.
+  4. Click Save with the invalid CC document.
+    - expect: The form remains open, no creation request is sent, and no success toast appears.
 
 #### 2.5. BEN-SINGLE-005 — Keep dependent schooling fields consistent  -- NO
 
@@ -172,7 +180,8 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
   1. Open Registrar estudiante, enter unsaved values, and wait for the optional feedback overlay that may appear after login.
     - expect: If shown, the overlay can be dismissed through the Cerrar popup accessible button without losing the form state.
   2. Select Cancelar or close the registration form.
-    - expect: The form closes without creating a beneficiary.
+    - expect: The form closes without creating a beneficiary (just now it
+    creates a beneficiary).
   3. Reopen Registrar estudiante.
     - expect: The form starts clean and no previous unsaved values remain.
 
