@@ -222,15 +222,23 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
   4. Complete the required identity and contact fields incrementally.
     - expect: Previously entered values remain available and no creation request is sent before a final submission.
 
-#### 3.3. ATT-SINGLE-003 — Validate attendant contact information
+#### 3.3. ATT-SINGLE-003 — Validate attendant boundaries and duplicate identifiers - ✅
 
-**File:** `tests/Beneficiary/register-attendant-contact-validation.spec.ts`
+**File:** `tests/Beneficiary/attendant-form/register-attendant-boundaries-and-duplicates.spec.ts`
 
 **Steps:**
-  1. Enter malformed, whitespace-only, and boundary values in each available phone and email field.
-    - expect: Invalid formats are rejected with field-specific feedback and valid boundary values are accepted.
-  2. Attempt submission while a contact field is invalid.
-    - expect: No creation request is sent and focus identifies the invalid control.
+  1. Exercise the observed input-length boundaries with values at and beyond each limit: government ID 15 characters, first name 30, second name 30, first last name 30, and second last name 30.
+    - expect: Each bounded control accepts its maximum valid length and does not retain characters beyond that boundary.
+  2. Enter bounded representative values in phone and email that exceed normal production lengths.
+    - expect: The current UI retains them because phone and email expose no input-length limit; do not submit these diagnostic values.
+  3. Create a baseline attendant using unique identifiers, valid boundary values, and one beneficiary relationship.
+    - expect: Exactly one `POST /v1.0/attendants` returns `201 Created`, and `Acudiente agregado correctamente.` is displayed.
+  4. Attempt registration with the baseline government ID and a different valid phone number.
+    - expect: The request is rejected with `message: "The government id already exists"`; the UI displays `Error al guardar el acudiente. Intenta nuevamente.` and keeps the form open.
+  5. Attempt registration with a unique government ID and the baseline phone number.
+    - expect: The request is rejected with `message: "The phone number already exists"`; the UI displays `Error al guardar el acudiente. Intenta nuevamente.` and keeps the form open.
+  6. Verify the resulting creation count.
+    - expect: Only the baseline attendant was created; both duplicate attempts were rejected.
 
 #### 3.4. ATT-SINGLE-004 — Prevent duplicate attendant association -- Just now it allows to update the beneficiary without notice about this decission to another attendant
 

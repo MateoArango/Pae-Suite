@@ -52,15 +52,29 @@ Update this file whenever a new automated test is created or testing exposes a p
 - Status: Implemented and passing in focused Chromium execution.
 - Coverage: Unique attendant identity, numeric phone, beneficiary association, exactly one `POST /v1.0/attendants`, `201 Created` response contract, success message, and attendant-panel search proof.
 
+### ATT-SINGLE-003 — Validate attendant boundaries and duplicate identifiers
+
+- File: `tests/Beneficiary/attendant-form/register-attendant-boundaries-and-duplicates.spec.ts`.
+- Status: Implemented and passing in focused Chromium execution.
+- Coverage: verified the 15-character government-ID boundary, all four 30-character name boundaries, missing phone/email length limits, one successful baseline creation, distinct duplicate API messages, the shared generic error toast, and exactly one successful response across three creation requests.
+
 ## Gaps and improvements
 
 ### Allow attendants to share a phone number
 
 - Related scenario: `ATT-SINGLE-003`.
 - Business rule: uniqueness belongs to the attendant government document, not the phone number.
-- A valid phone number may be shared by multiple attendants and must not trigger duplicate-attendant validation.
-- Coverage improvement: create attendants with unique government documents but the same valid phone number and verify each creation succeeds.
-- Keep phone validation focused on the accepted format and length; do not imply or enforce phone-number uniqueness.
+- Current API behavior: a second attendant with a unique government ID and an existing phone is rejected with `message: "The phone number already exists"`.
+- Current UI behavior: both duplicate-government-ID and duplicate-phone failures display only `Error al guardar el acudiente. Intenta nuevamente.`.
+- Improvement: allow a valid phone number to be shared by multiple attendants, and reserve uniqueness enforcement for the government ID.
+- Feedback improvement: when a save is rejected, translate the API reason into specific accessible UI feedback instead of the same generic toast for every conflict.
+
+### Attendant phone and email have no length boundaries
+
+- Related scenario: `ATT-SINGLE-003`.
+- Confirmed boundaries: government ID accepts up to 15 characters; first name, second name, first last name, and second last name accept up to 30 characters each.
+- Current gap: phone and email expose no input-length limit, allowing values far beyond practical production lengths to remain in the form.
+- Improvement: define business-approved maximum lengths for phone and email, enforce the same limits in the UI and API, and provide field-specific validation feedback.
 
 ### Required beneficiary fields rely on color alone
 

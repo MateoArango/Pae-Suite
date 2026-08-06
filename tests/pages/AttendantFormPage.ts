@@ -37,6 +37,7 @@ export class AttendantFormPage extends BasePage {
   readonly emailInput: Locator;
   readonly missingBeneficiaryFeedback: Locator;
   readonly requiredFieldsToast: Locator;
+  readonly saveErrorToast: Locator;
   readonly successToast: Locator;
 
   constructor(page: Page) {
@@ -96,6 +97,10 @@ export class AttendantFormPage extends BasePage {
     );
     this.requiredFieldsToast = page.getByText(
       'Por favor complete todos los campos obligatorios.',
+      { exact: true },
+    );
+    this.saveErrorToast = page.getByText(
+      'Error al guardar el acudiente. Intenta nuevamente.',
       { exact: true },
     );
     this.successToast = page.getByText('Acudiente agregado correctamente.', {
