@@ -160,7 +160,7 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
   4. Click Save with the invalid CC document.
     - expect: The form remains open, no creation request is sent, and no success toast appears.
 
-#### 2.5. BEN-SINGLE-005 — Keep dependent schooling fields consistent  -- NO
+#### 2.5. BEN-SINGLE-005 — Keep dependent schooling fields consistent  -- NO ❌
 
 **File:** `tests/Beneficiary/register-beneficiary-dependent-fields.spec.ts`
 
@@ -172,16 +172,19 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
   3. Change an upstream selection.
     - expect: Incompatible downstream values are cleared and must be selected again before submission.
 
-#### 2.6. BEN-SINGLE-006 — Cancel registration and handle the delayed feedback overlay -- Very cool but just now it creates clicking on 'x' icon
+#### 2.6. BEN-SINGLE-006 — Cancel registration and handle the delayed feedback overlay — Partial
 
 **File:** `tests/Beneficiary/register-beneficiary-cancel-and-overlay.spec.ts`
+
+**Test cases:**
+- `X closes without creating a beneficiary` — `test.fixme`; clicking X currently creates the beneficiary.
+- `Cancelar closes without creating a beneficiary` — active regression coverage; Cancelar sends no creation request.
 
 **Steps:**
   1. Open Registrar estudiante, enter unsaved values, and wait for the optional feedback overlay that may appear after login.
     - expect: If shown, the overlay can be dismissed through the Cerrar popup accessible button without losing the form state.
-  2. Select Cancelar or close the registration form.
-    - expect: The form closes without creating a beneficiary (just now it
-    creates a beneficiary).
+  2. Exercise Cancelar and X as separate behaviors.
+    - expect: Cancelar closes the form without sending a creation request. X should do the same, but its expected-behavior test remains `fixme` while the known creation defect exists.
   3. Reopen Registrar estudiante.
     - expect: The form starts clean and no previous unsaved values remain.
 

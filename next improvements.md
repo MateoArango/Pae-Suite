@@ -64,6 +64,15 @@ Update this file whenever a new automated test is created or testing exposes a p
 - Product gap: the form appears not to submit successfully without telling the user that the document number is duplicated.
 - Improvement: show a visible error toast such as `Ya existe un beneficiario con el número de documento ingresado`, keep the entered values available for correction, and expose the message through an accessible `alert` or `aria-live` region.
 
+### Closing beneficiary registration with X creates the beneficiary
+
+- Related scenario: `BEN-SINGLE-006`.
+- File: `tests/Beneficiary/register-beneficiary-cancel-and-overlay.spec.ts`.
+- Status: the X expected-behavior regression test is marked `test.fixme`; the separate Cancelar test remains active.
+- Current behavior: with valid unsaved values, clicking X creates the beneficiary, while Cancelar closes the form without sending `POST /v1.0/beneficiaries`.
+- Product risk: a user can create a record while explicitly trying to dismiss the form.
+- Improvement: make X a non-submit button, close without invoking creation, and keep both X and Cancelar aligned with the zero-request contract.
+
 ### Invalid beneficiary document fails silently
 
 - Related scenario: `BEN-SINGLE-004`.
