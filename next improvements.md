@@ -69,6 +69,13 @@ Update this file whenever a new automated test is created or testing exposes a p
 - Accessibility gap: users who cannot perceive the color change may not know which fields are invalid or why submission was blocked.
 - Improvement: display `Este campo es obligatorio` for each missing value, associate it with the control through `aria-describedby`, and expose a form-level validation summary when submission fails.
 
+### Required attendant fields are not identified individually
+
+- Related scenario: `ATT-SINGLE-002`.
+- Current behavior: after associating a beneficiary, submitting with empty personal data displays `Por favor complete todos los campos obligatorios.`, but the required controls do not receive red invalid styling or field-level messages.
+- Accessibility gap: the form-level message does not identify each missing identity and contact value at its control.
+- Improvement: mark each missing control invalid, display an associated `Este campo es obligatorio` message, and move focus to the first invalid control.
+
 ### Duplicate beneficiary document has no user feedback
 
 - Related scenario: `BEN-SINGLE-003`.

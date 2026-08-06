@@ -208,15 +208,19 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
   5. Search the Acudientes panel by the newly created attendant's full name.
     - expect: The newly created attendant appears in the filtered list.
 
-#### 3.2. ATT-SINGLE-002 — Validate required attendant fields
+#### 3.2. ATT-SINGLE-002 — Validate required attendant fields ✅
 
-**File:** `tests/Beneficiary/register-attendant-required-fields.spec.ts`
+**File:** `tests/Beneficiary/attendant-form/register-attendant-required-fields.spec.ts`
 
 **Steps:**
-  1. Open the attendant form and submit it empty.
-    - expect: No creation request is sent and required identity, relationship, and contact fields show associated feedback.
-  2. Complete required fields incrementally.
-    - expect: Resolved errors clear without erasing other entered values.
+  1. Open the attendant form and submit it without selecting a beneficiary.
+    - expect: No creation request is sent, the form remains open, and `Debes asociar al menos un estudiante antes de guardar.` is displayed.
+  2. Add one available beneficiary and confirm the selection.
+    - expect: The beneficiary relationship is retained by the form.
+  3. Submit while the required personal fields remain empty.
+    - expect: No creation request is sent, the form remains open, and `Por favor complete todos los campos obligatorios.` is displayed without applying red invalid styling to the required personal-data controls.
+  4. Complete the required identity and contact fields incrementally.
+    - expect: Previously entered values remain available and no creation request is sent before a final submission.
 
 #### 3.3. ATT-SINGLE-003 — Validate attendant contact information
 

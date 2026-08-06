@@ -35,6 +35,8 @@ export class AttendantFormPage extends BasePage {
   readonly secondLastNameInput: Locator;
   readonly phoneNumberInput: Locator;
   readonly emailInput: Locator;
+  readonly missingBeneficiaryFeedback: Locator;
+  readonly requiredFieldsToast: Locator;
   readonly successToast: Locator;
 
   constructor(page: Page) {
@@ -88,6 +90,14 @@ export class AttendantFormPage extends BasePage {
     this.secondLastNameInput = this.form.locator('[name="secondLastName"]');
     this.phoneNumberInput = this.form.locator('[name="phoneNumber"]');
     this.emailInput = this.form.locator('[name="email"]');
+    this.missingBeneficiaryFeedback = this.form.getByText(
+      'Debes asociar al menos un estudiante antes de guardar.',
+      { exact: true },
+    );
+    this.requiredFieldsToast = page.getByText(
+      'Por favor complete todos los campos obligatorios.',
+      { exact: true },
+    );
     this.successToast = page.getByText('Acudiente agregado correctamente.', {
       exact: true,
     });
