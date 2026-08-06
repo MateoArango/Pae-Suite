@@ -24,7 +24,7 @@ export class LoginPage extends BasePage {
       'Usuario o contraseña incorrectos',
       { exact: true },
     );
-    this.authenticatedAccount = page.getByText('Desarrollo Prisma');
+    this.authenticatedAccount = page.getByText('Mateo Ada');
     this.feedbackPopup = page.getByText(
       '¿Cómo ha sido tu experiencia con el portal?',
       { exact: true },
@@ -52,7 +52,7 @@ export class LoginPage extends BasePage {
   }
 
   async fillValidCredentials(): Promise<void> {
-    await this.fillCredentials(this.validUsername, this.validPassword);
+    await this.fillCredentials('mateo.ada', 'mateo123');
   }
 
   async fillInvalidCredentials(): Promise<void> {

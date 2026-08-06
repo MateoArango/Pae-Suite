@@ -130,7 +130,7 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
   3. Use keyboard navigation through invalid fields.
     - expect: Focus is visible and reaches the first invalid field in a logical order. Fill one required field and verify his validation state is cleared.
 
-#### 2.3. BEN-SINGLE-003 — Prevent duplicate beneficiary document
+#### 2.3. BEN-SINGLE-003 — Prevent duplicate beneficiary document - ✅
 
 **File:** `tests/Beneficiary/register-duplicate-beneficiary.spec.ts`
 

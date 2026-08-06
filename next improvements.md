@@ -58,6 +58,8 @@ Update this file whenever a new automated test is created or testing exposes a p
 ### Duplicate beneficiary document has no user feedback
 
 - Related scenario: `BEN-SINGLE-003`.
+- File: `tests/Beneficiary/register-duplicate-beneficiary.spec.ts`.
+- Status: Implemented; the test validates the rejected API response and its `message: "The government id already exists"` contract while visible UI feedback remains unavailable.
 - The application prevents creation when the government ID already exists, but no toast or validation message explains why the beneficiary was not created.
 - Product gap: the form appears not to submit successfully without telling the user that the document number is duplicated.
 - Improvement: show a visible error toast such as `Ya existe un beneficiario con el número de documento ingresado`, keep the entered values available for correction, and expose the message through an accessible `alert` or `aria-live` region.
