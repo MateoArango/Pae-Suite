@@ -102,6 +102,6 @@ export class LoginPage extends BasePage {
     }
 
     await this.feedbackPopupCloseButton.click();
-    await this.feedbackPopup.waitFor({ state: 'hidden' });
+    await this.feedbackPopupImproveProcess.waitFor({ state: 'hidden' });
   }
 }

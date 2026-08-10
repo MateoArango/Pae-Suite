@@ -240,25 +240,33 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
   6. Verify the resulting creation count.
     - expect: Only the baseline attendant was created; both duplicate attempts were rejected.
 
-#### 3.4. ATT-SINGLE-004 — Prevent duplicate attendant association -- Just now it allows to update the beneficiary without notice about this decission to another attendant
+#### 3.4. ATT-SINGLE-004 — Reassign a beneficiary to another attendant
 
 **File:** `tests/Beneficiary/register-duplicate-attendant.spec.ts`
 
-**Steps:**
-  1. Attempt to register an attendant document already associated with the same beneficiary.
-    - expect: The duplicate association is rejected or presented as an existing association according to the product rule.
-  2. Open the beneficiary's attendant detail.
-    - expect: Only one association exists and existing attendant data was not overwritten unexpectedly.
-
-#### 3.5. ATT-SINGLE-005 — Define behavior when one attendant serves multiple beneficiaries
-
-**File:** `tests/Beneficiary/register-shared-attendant.spec.ts`
+**Current behavior:** Registering a different attendant with a beneficiary who already has an attendant updates the beneficiary's relationship without displaying a warning or requesting confirmation.
 
 **Steps:**
-  1. Use an attendant document already associated with a different beneficiary and complete the relationship for the current beneficiary.
-    - expect: The application follows the confirmed business rule: reuse/link the attendant or clearly reject the association without duplicating the person.
-  2. Inspect both beneficiary details.
-    - expect: Associations and attendant identity remain consistent with the confirmed rule.
+  1. Identify a beneficiary who is already associated with an existing attendant.
+    - expect: The beneficiary's current attendant association is visible and can be recorded for comparison.
+  2. Register a different attendant and select the same beneficiary.
+    - expect: The new attendant is created successfully without a reassignment warning or confirmation prompt.
+  3. Open the beneficiary's attendant detail.
+    - expect: The beneficiary is now associated with the new attendant, the previous attendant's personal data remains unchanged, and no duplicate relationship exists for the beneficiary.
+
+#### 3.5. ATT-SINGLE-005 — Link one attendant to multiple beneficiaries
+
+**File:** `tests/Beneficiary/attendant-form/register-shared-attendant.spec.ts`
+
+**Steps:**
+  1. Create one randomized attendant using the first existing beneficiary shown in the relationship list.
+    - expect: Exactly one new attendant identity is created successfully.
+  2. Create two beneficiaries, each with a unique document and randomized name retained by the test.
+    - expect: Both beneficiaries are created successfully and can be found by their saved full names.
+  3. Open each new beneficiary, enable editing, search for the existing attendant, select it, and save the relationship.
+    - expect: Each update displays `El estudiante ha sido actualizado correctamente.`
+  4. Search for and reopen both new beneficiaries.
+    - expect: Both beneficiaries display the same attendant identity and open its attendant detail, proving that the attendant now serves three beneficiaries in total.
 
 #### 3.6. ATT-SINGLE-006 — Cancel attendant registration without partial data
 

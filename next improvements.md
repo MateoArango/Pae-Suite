@@ -76,6 +76,14 @@ Update this file whenever a new automated test is created or testing exposes a p
 - Current gap: phone and email expose no input-length limit, allowing values far beyond practical production lengths to remain in the form.
 - Improvement: define business-approved maximum lengths for phone and email, enforce the same limits in the UI and API, and provide field-specific validation feedback.
 
+### Reassigning a beneficiary to another attendant has no warning
+
+- Related scenario: `ATT-SINGLE-004`.
+- File: `tests/Beneficiary/register-duplicate-attendant.spec.ts`.
+- Current behavior: registering a different attendant with a beneficiary who already has an attendant updates the beneficiary's relationship without notifying the user or requesting confirmation.
+- Product risk: a user can unintentionally replace the beneficiary's attendant relationship without understanding that the existing association will change.
+- Improvement: before reassigning the beneficiary, display the current and proposed attendants, explain that the existing relationship will be replaced, and require explicit confirmation. Cancelling must retain the original relationship, while confirming must update only the relationship without overwriting either attendant's personal data or creating a duplicate association.
+
 ### Required beneficiary fields rely on color alone
 
 - Related scenario: `BEN-SINGLE-002`.
