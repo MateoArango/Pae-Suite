@@ -12,6 +12,11 @@ export type AttendantPersonalData = {
   email?: string;
 };
 
+export type SelectedBeneficiary = {
+  id: string;
+  name: string;
+};
+
 export class AttendantFormPage extends BasePage {
   readonly attendantsTabButton: Locator;
   readonly beneficiariesNavigationButton: Locator;
@@ -23,6 +28,7 @@ export class AttendantFormPage extends BasePage {
   readonly mainBeneficiarySearchInputLens: Locator;
   readonly beneficiaryDetailTitle: Locator;
   readonly beneficiaryAttendantRole: Locator;
+  readonly attendantDetailTitle: Locator;
   readonly form: Locator;
   readonly formTitle: Locator;
   readonly closeButton: Locator;
@@ -68,11 +74,16 @@ export class AttendantFormPage extends BasePage {
     this.mainBeneficiarySearchInput = page.getByTestId(
       "interactive-searchbar-input",
     );
-    this.mainBeneficiarySearchInputLens = page.getByTestId("students-tab-search-beneficiaries");
+    this.mainBeneficiarySearchInputLens = page.getByTestId(
+      "students-tab-search-beneficiaries",
+    );
     this.beneficiaryDetailTitle = page.getByText("Detalle beneficiario", {
       exact: true,
     });
     this.beneficiaryAttendantRole = page.getByText("Titular", { exact: true });
+    this.attendantDetailTitle = page.getByText("Detalle acudiente", {
+      exact: true,
+    });
 
     this.form = page.getByTestId("attendants-form-root");
     this.formTitle = this.form.getByText("Registrar acudiente", {
@@ -243,35 +254,62 @@ export class AttendantFormPage extends BasePage {
   }
 
   async selectFirstBeneficiaryAndGetName(): Promise<string> {
-    const firstBeneficiaryCheckbox = this.form
+    const [firstBeneficiary] =
+      await this.selectFirstBeneficiariesAndGetNames(1);
+
+    return firstBeneficiary.name;
+  }
+
+  async selectFirstBeneficiariesAndGetNames(
+    count: number,
+  ): Promise<SelectedBeneficiary[]> {
+    const beneficiaryCheckboxes = this.form
       .locator('[test-id^="attendants-beneficiaries-checkbox-"]')
-      .first();
-    const checkboxTestId =
-      await firstBeneficiaryCheckbox.getAttribute("test-id");
-    const beneficiaryId = checkboxTestId?.replace(
-      "attendants-beneficiaries-checkbox-",
-      "",
-    );
+      .filter({ visible: true });
 
-    if (!beneficiaryId) {
-      throw new Error("The first beneficiary checkbox has no beneficiary ID.");
+    await beneficiaryCheckboxes.first().waitFor({ state: "visible" });
+
+    if ((await beneficiaryCheckboxes.count()) < count) {
+      throw new Error(`Fewer than ${count} beneficiaries are available.`);
     }
 
-    const beneficiaryRowText =
-      await this.beneficiaryRow(beneficiaryId).innerText();
-    const beneficiaryName = beneficiaryRowText
-      .split("\n")
-      .map((value) => value.trim())
-      // The first row label is the beneficiary's one-letter avatar (for
-      // example, "T"). Skip it and capture the first substantive label.
-      .find((value) => value.length > 1);
+    const selectedBeneficiaries: SelectedBeneficiary[] = [];
 
-    if (!beneficiaryName) {
-      throw new Error("The first beneficiary row has no visible name.");
+    for (let index = 0; index < count; index += 1) {
+      const checkbox = beneficiaryCheckboxes.nth(index);
+      const checkboxTestId = await checkbox.getAttribute("test-id");
+      const beneficiaryId = checkboxTestId?.replace(
+        "attendants-beneficiaries-checkbox-",
+        "",
+      );
+
+      if (!beneficiaryId) {
+        throw new Error(`Beneficiary checkbox ${index + 1} has no ID.`);
+      }
+
+      const beneficiaryRowText =
+        await this.beneficiaryRow(beneficiaryId).innerText();
+      const beneficiaryName = beneficiaryRowText
+        .split("\n")
+        .map((value) => value.trim())
+        // The first row label is the beneficiary's one-letter avatar. Skip it
+        // and capture the first substantive label.
+        .find((value) => value.length > 1);
+
+      if (!beneficiaryName) {
+        throw new Error(
+          `Beneficiary row ${beneficiaryId} has no visible name.`,
+        );
+      }
+
+      selectedBeneficiaries.push({ id: beneficiaryId, name: beneficiaryName });
     }
 
-    await firstBeneficiaryCheckbox.click();
-    return beneficiaryName;
+    for (const beneficiary of selectedBeneficiaries) {
+      await this.selectBeneficiary(beneficiary.id);
+    }
+
+    return selectedBeneficiaries;
   }
 
   async confirmBeneficiarySelection(): Promise<void> {
