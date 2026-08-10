@@ -223,15 +223,17 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
 3. Open each new beneficiary, enable editing, search for the existing attendant, select it, and save the relationship. - expect: Each update displays `El estudiante ha sido actualizado correctamente.`
 4. Search for and reopen both new beneficiaries. - expect: Both beneficiaries display the same attendant identity and open its attendant detail, proving that the attendant now serves three beneficiaries in total.
 
-#### 3.6. ATT-SINGLE-006 — Cancel attendant registration without partial data
+#### 3.6. ATT-SINGLE-006 — Cancel attendant registration without partial data ✅
 
-**File:** `tests/Beneficiary/register-attendant-cancel.spec.ts`
+**File:** `tests/Beneficiary/attendant-form/register-attendant-cancel.spec.ts`
 
 **Steps:**
 
 1. Open the attendant form and enter unsaved values. - expect: The form remains editable and no creation request has occurred.
-2. Select Cancelar or close the form. - expect: The form closes and no attendant or relationship is partially created.
+2. Close the form with X. - expect: The form closes and no attendant or relationship is partially created.
 3. Reopen the attendant workflow for the same beneficiary. - expect: The form is clean and the cancelled values are absent.
+
+**Observed:** Closing with X sends zero `POST /v1.0/attendants` requests. Reopening clears the unsaved document, first name, first surname, and phone values.
 
 #### 3.7. ATT-SINGLE-007 — Register one attendant with three beneficiaries
 

@@ -58,6 +58,12 @@ Update this file whenever a new automated test is created or testing exposes a p
 - Status: Implemented and passing in focused Chromium execution.
 - Coverage: verified the 15-character government-ID boundary, all four 30-character name boundaries, missing phone/email length limits, one successful baseline creation, distinct duplicate API messages, the shared generic error toast, and exactly one successful response across three creation requests.
 
+### ATT-SINGLE-006 — Cancel attendant registration without partial data
+
+- File: `tests/Beneficiary/attendant-form/register-attendant-cancel.spec.ts`.
+- Status: Implemented and passing in focused Chromium execution.
+- Coverage: valid unsaved personal data, zero `POST /v1.0/attendants` requests after closing with X, hidden form state, and clean document, name, surname, and phone values after reopening.
+
 ## Gaps and improvements
 
 ### Allow attendants to share a phone number
