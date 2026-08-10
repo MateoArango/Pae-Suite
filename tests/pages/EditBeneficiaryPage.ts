@@ -6,7 +6,20 @@ export class EditBeneficiaryPage extends BasePage {
   readonly mainBeneficiarySearchInputLens: Locator;
   readonly mainBeneficiarySearchInput: Locator;
   readonly closeDialogButton: Locator;
+  readonly saveHeaderButton: Locator;
   readonly enableEditButton: Locator;
+  readonly firstNameInput: Locator;
+  readonly secondNameInput: Locator;
+  readonly firstLastNameInput: Locator;
+  readonly secondLastNameInput: Locator;
+  readonly documentTypeSelect: Locator;
+  readonly documentNumberInput: Locator;
+  readonly academicGradeSelect: Locator;
+  readonly groupInput: Locator;
+  readonly populationTypeSelect: Locator;
+  readonly deleteBeneficiaryButton: Locator;
+  readonly cancelFooterButton: Locator;
+  readonly saveFooterButton: Locator;
   readonly openAddAttendantButton: Locator;
   readonly attendantSearchInput: Locator;
   readonly saveAttendantSelectionButton: Locator;
@@ -29,8 +42,47 @@ export class EditBeneficiaryPage extends BasePage {
     this.closeDialogButton = this.form.getByTestId(
       'form-beneficiaries-close-dialog-beneficiaries',
     );
+    this.saveHeaderButton = this.form.getByTestId(
+      'form-beneficiaries-save-header-edit-beneficiaries',
+    );
     this.enableEditButton = this.form.getByTestId(
       'form-beneficiaries-enable-edit-beneficiaries',
+    );
+    this.firstNameInput = this.form.getByTestId(
+      'form-beneficiaries-input-first-name-beneficiaries',
+    );
+    this.secondNameInput = this.form.getByTestId(
+      'form-beneficiaries-input-second-name-beneficiaries',
+    );
+    this.firstLastNameInput = this.form.getByTestId(
+      'form-beneficiaries-input-first-last-name-beneficiaries',
+    );
+    this.secondLastNameInput = this.form.getByTestId(
+      'form-beneficiaries-input-second-last-name-beneficiaries',
+    );
+    this.documentTypeSelect = this.form.getByTestId(
+      'form-beneficiaries-select-document-type-beneficiaries',
+    );
+    this.documentNumberInput = this.form.getByTestId(
+      'form-beneficiaries-input-document-number-beneficiaries',
+    );
+    this.academicGradeSelect = this.form.getByTestId(
+      'form-beneficiaries-select-academic-grade-beneficiaries',
+    );
+    this.groupInput = this.form.getByTestId(
+      'form-beneficiaries-input-group-beneficiaries',
+    );
+    this.populationTypeSelect = this.form.getByTestId(
+      'form-beneficiaries-select-population-type-beneficiaries',
+    );
+    this.deleteBeneficiaryButton = this.form.getByTestId(
+      'form-beneficiaries-delete-beneficiary-beneficiaries',
+    );
+    this.cancelFooterButton = this.form.getByTestId(
+      'form-beneficiaries-cancel-footer-beneficiaries',
+    );
+    this.saveFooterButton = this.form.getByTestId(
+      'form-beneficiaries-save-footer-beneficiaries',
     );
     this.openAddAttendantButton = this.form.getByTestId(
       'form-beneficiaries-open-add-attendant-beneficiaries',
@@ -65,6 +117,13 @@ export class EditBeneficiaryPage extends BasePage {
       name: beneficiaryName,
       exact: true,
     });
+  }
+
+  deletionSuccessToast(beneficiaryName: string): Locator {
+    return this.page.getByText(
+      `El estudiante ${beneficiaryName} ha sido eliminado correctamente`,
+      { exact: true },
+    );
   }
 
   attendantOption(attendantName: string): Locator {

@@ -1,8 +1,8 @@
-# Beneficiarios Test Plan
+# PaeSuitePlan
 
 ## Application Overview
 
-Validate the three primary Beneficiarios creation paths in PAE: bulk import from a workbook, single-beneficiary registration, and single-attendant registration. Each scenario starts from an authenticated, fresh browser context with deterministic QA data and must clean up or use unique document numbers so scenarios can run independently and in any order. The existing seed establishes login and navigation but also performs a real import; generators should refactor it into a lightweight setup before automating these scenarios.
+`PaeSuitePlan` is the central test plan for all automated PAE workflows. It organizes coverage by application feature and records each scenario's identifier, purpose, setup, steps, expected results, implementation file, and current status. Tests should start from a controlled state, use deterministic or unique QA data, avoid dependencies on execution order, and verify both visible behavior and relevant network contracts. Feature-specific setup, shared-data risks, known product gaps, and execution limitations must be documented in their corresponding sections. Existing seeds should remain lightweight and prepare only the authentication, navigation, permissions, and data required by each workflow.
 
 ## Test Scenarios
 
@@ -244,3 +244,76 @@ Validate the three primary Beneficiarios creation paths in PAE: bulk import from
 1. Open Registrar acudiente, complete unique valid personal data, and select the first three visible beneficiaries while retaining their displayed names. - expect: All three beneficiary relationships are selected and exactly one attendant is created successfully.
 2. Search for and open each retained beneficiary. - expect: Every beneficiary displays the newly created attendant as its titular relationship.
 3. Open Acudientes, search for the new attendant, and open its detail. - expect: The attendant detail displays all three retained beneficiary names.
+
+### 4. Beneficiary editing
+
+**Seed:** `tests/Beneficiary/seed.spec.ts`
+
+**Page object:** `tests/pages/EditBeneficiaryPage.ts`
+
+**Planning mode:** Design only. Do not execute these scenarios against shared QA until the target records and mutation scope are approved. Every scenario that changes or deletes data must create its own uniquely identified beneficiary as a precondition. Capture the edit and delete request contracts during the first authorized browser run; their HTTP methods and paths are not yet confirmed in the repository.
+
+#### 4.1. BEN-EDIT-001 — Edit beneficiary personal and schooling information
+
+**Planned file:** `tests/Beneficiary/edit-beneficiary/edit-beneficiary-information.spec.ts`
+
+**Steps:**
+
+1. Create a beneficiary with unique deterministic data and search for that beneficiary. - expect: Exactly one matching beneficiary is displayed.
+2. Open the beneficiary detail and enable editing. - expect: Editable personal and schooling controls become available with the current values retained.
+3. Change the first name, first surname, grade, group, and population type, then save once. - expect: Exactly one successful beneficiary-update request occurs and `El estudiante ha sido actualizado correctamente.` is displayed.
+4. Close, search for, and reopen the beneficiary. - expect: The saved values persist in the beneficiary detail.
+
+#### 4.2. BEN-EDIT-002 — Validate required fields while editing
+
+**Planned file:** `tests/Beneficiary/edit-beneficiary/edit-beneficiary-required-fields.spec.ts`
+
+**Steps:**
+
+1. Create a unique beneficiary, reopen it, and enable editing. - expect: The current beneficiary values are loaded into the form.
+2. Clear the required first name, first surname, document number, grade, group, and population type, then attempt to save. - expect: The form remains open, required controls expose validation feedback, and no update request is sent.
+3. Restore the required fields incrementally. - expect: Restored controls clear their invalid state while unresolved required controls remain invalid.
+
+#### 4.3. BEN-EDIT-003 — Cancel editing without saving changes
+
+**Planned file:** `tests/Beneficiary/edit-beneficiary/edit-beneficiary-cancel.spec.ts`
+
+**Steps:**
+
+1. Create a unique beneficiary, reopen it, enable editing, and change representative values without saving. - expect: The edited values are visible only in the open form and no update request occurs.
+2. Click the footer Cancelar button. - expect: The form closes without sending an update request.
+3. Search for and reopen the same beneficiary. - expect: The original persisted values are displayed and the unsaved changes are absent.
+4. Repeat the unsaved edit and close it with the header back button. - expect: No update request is sent and the original values remain persisted after reopening.
+
+#### 4.4. BEN-EDIT-004 — Associate or replace the beneficiary's attendant
+
+**Planned file:** `tests/Beneficiary/edit-beneficiary/edit-beneficiary-attendant.spec.ts`
+
+**Steps:**
+
+1. Create a unique beneficiary without an attendant and identify a deterministic attendant that the test may associate. - expect: The beneficiary and attendant preconditions are available without modifying another scenario's records.
+2. Open the beneficiary, enable editing, search for the attendant, select it, and save the relationship. - expect: The update succeeds and `El estudiante ha sido actualizado correctamente.` is displayed.
+3. Close and reopen the beneficiary. - expect: The selected attendant persists as the beneficiary's titular relationship and its detail can be opened.
+
+#### 4.5. BEN-EDIT-005 — Prevent a duplicate beneficiary document during editing
+
+**Planned file:** `tests/Beneficiary/edit-beneficiary/edit-beneficiary-duplicate-document.spec.ts`
+
+**Steps:**
+
+1. Create two beneficiaries with unique, different document numbers. - expect: Both records exist independently before editing.
+2. Open the first beneficiary and attempt to replace its document number with the second beneficiary's document number. - expect: The update is rejected by the beneficiary-update endpoint with the observed duplicate-document response.
+3. Reopen both beneficiaries. - expect: Neither persisted record was overwritten or duplicated, and the first beneficiary retains its original document number.
+
+#### 4.6. BEN-EDIT-006 — Delete a beneficiary created by the test
+
+**Planned file:** `tests/Beneficiary/edit-beneficiary/delete-beneficiary.spec.ts`
+
+**Steps:**
+
+1. Create a beneficiary with a unique document number and retain its generated full name. - expect: The beneficiary exists and can be found through the main Beneficiarios search.
+2. Open the beneficiary, enable editing, and click Eliminar estudiante. - expect: The deletion flow is initiated for the selected beneficiary only; handle and verify a confirmation dialog if the application displays one.
+3. Confirm deletion and observe the network operation. - expect: Exactly one successful beneficiary-delete request occurs and `El estudiante <beneficiaryName> ha sido eliminado correctamente` is displayed using the retained full name.
+4. Search again by the deleted beneficiary's document number. - expect: `No se encontraron beneficiarios que coincidan con los filtros` is displayed and the deleted record cannot be reopened.
+
+**Safety:** Never use a pre-existing shared-QA beneficiary for this scenario. If creation fails, skip the deletion action and fail during precondition setup.
