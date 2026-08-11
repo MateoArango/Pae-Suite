@@ -126,6 +126,10 @@ export class EditBeneficiaryPage extends BasePage {
     );
   }
 
+  requiredFieldContainer(control: Locator): Locator {
+    return control.locator("xpath=ancestor::mat-form-field");
+  }
+
   attendantOption(attendantName: string): Locator {
     return this.form.getByText(attendantName, { exact: true });
   }

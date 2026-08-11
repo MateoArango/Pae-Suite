@@ -64,7 +64,23 @@ Update this file whenever a new automated test is created or testing exposes a p
 - Status: Implemented and passing in focused Chromium execution.
 - Coverage: valid unsaved personal data, zero `POST /v1.0/attendants` requests after closing with X, hidden form state, and clean document, name, surname, and phone values after reopening.
 
+### BEN-EDIT-001 — Edit beneficiary personal and schooling information
+
+- File: `tests/Beneficiary/edit-beneficiary/edit-beneficiary-information.spec.ts`.
+- Status: Implemented and passing in focused Chromium execution.
+- Coverage: nine independently saved editable fields, exactly nine successful `PATCH /v1.0/beneficiaries/{id}` requests, reload after every save, document-number-only search, and persisted final values.
+- Known feedback gap: the existing `updateSuccessToast` assertion is commented with a system-correction TODO because successful beneficiary updates currently display no toast.
+
 ## Gaps and improvements
+
+### Successful beneficiary update has no confirmation toast
+
+- Related scenario: `BEN-EDIT-001`.
+- File: `tests/Beneficiary/edit-beneficiary/edit-beneficiary-information.spec.ts`.
+- Current API behavior: each beneficiary update succeeds with `PATCH /v1.0/beneficiaries/{id}` and the saved value persists after reloading and reopening the record by document number.
+- Current UI behavior: no confirmation toast appears after a successful update.
+- Expected feedback: display `El estudiante ha sido actualizado correctamente.` after every successful update.
+- Test follow-up: uncomment `await expect(editBeneficiary.updateSuccessToast).toBeVisible()` when the system correction is deployed.
 
 ### Allow attendants to share a phone number
 

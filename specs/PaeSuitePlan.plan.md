@@ -249,7 +249,7 @@
 
 **Planning mode:** Design only. Do not execute these scenarios against shared QA until the target records and mutation scope are approved. Every scenario that changes or deletes data must create its own uniquely identified beneficiary as a precondition. Capture the edit and delete request contracts during the first authorized browser run; their HTTP methods and paths are not yet confirmed in the repository.
 
-#### 4.1. BEN-EDIT-001 — Edit beneficiary personal and schooling information
+#### 4.1. BEN-EDIT-001 — Edit beneficiary personal and schooling information✅
 
 **Planned file:** `tests/Beneficiary/edit-beneficiary/edit-beneficiary-information.spec.ts`
 
