@@ -260,7 +260,7 @@
 3. After every individual save, reload the page, search only by the current document number, reopen the exact record, and enable editing again. - expect: The value just saved persists before the next field is changed. When the document number itself changes, all subsequent searches use the new number.
 4. After the final reload and document-number search, reopen the beneficiary. - expect: All nine final personal and schooling values persist together, and exactly nine update requests occurred.
 
-#### 4.2. BEN-EDIT-002 — Validate required fields while editing
+#### 4.2. BEN-EDIT-002 — Validate required fields while editing✅
 
 **Planned file:** `tests/Beneficiary/edit-beneficiary/edit-beneficiary-required-fields.spec.ts`
 
