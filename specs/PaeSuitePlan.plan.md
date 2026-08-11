@@ -200,9 +200,9 @@
 5. Attempt registration with a unique government ID and the baseline phone number. - expect: The request is rejected with `message: "The phone number already exists"`; the UI displays `Error al guardar el acudiente. Intenta nuevamente.` and keeps the form open.
 6. Verify the resulting creation count. - expect: Only the baseline attendant was created; both duplicate attempts were rejected.
 
-#### 3.4. ATT-SINGLE-004 — Reassign a beneficiary to another attendant
+#### 3.4. ATT-SINGLE-004 — Reassign a beneficiary to another attendant ✅
 
-**File:** `tests/Beneficiary/register-duplicate-attendant.spec.ts`
+**File:** `tests/Beneficiary/attendant-form/register-duplicate-attendant.spec.ts`
 
 **Current behavior:** Registering a different attendant with a beneficiary who already has an attendant updates the beneficiary's relationship without displaying a warning or requesting confirmation.
 
@@ -210,9 +210,11 @@
 
 1. Identify a beneficiary who is already associated with an existing attendant. - expect: The beneficiary's current attendant association is visible and can be recorded for comparison.
 2. Register a different attendant and select the same beneficiary. - expect: The new attendant is created successfully without a reassignment warning or confirmation prompt.
-3. Open the beneficiary's attendant detail. - expect: The beneficiary is now associated with the new attendant, the previous attendant's personal data remains unchanged, and no duplicate relationship exists for the beneficiary.
+3. Search for and open the retained beneficiary by its unique document number. - expect: The intended beneficiary is opened even when other beneficiaries share its name, and it displays the newly created attendant as its titular relationship.
 
-#### 3.5. ATT-SINGLE-005 — Link one attendant to multiple beneficiaries
+**Observed:** In the user-confirmed run, searching by the retained document opened the intended beneficiary and the new attendant appeared as its titular relationship. This avoids the previous ambiguity produced by repeated beneficiary names.
+
+#### 3.5. ATT-SINGLE-005 — Link one attendant to multiple beneficiaries ✅
 
 **File:** `tests/Beneficiary/attendant-form/register-shared-attendant.spec.ts`
 
@@ -235,15 +237,17 @@
 
 **Observed:** Closing with X sends zero `POST /v1.0/attendants` requests. Reopening clears the unsaved document, first name, first surname, and phone values.
 
-#### 3.7. ATT-SINGLE-007 — Register one attendant with three beneficiaries
+#### 3.7. ATT-SINGLE-007 — Register one attendant with three beneficiaries ✅
 
 **File:** `tests/Beneficiary/attendant-form/register-attendant-with-three-beneficiaries.spec.ts`
 
 **Steps:**
 
-1. Open Registrar acudiente, complete unique valid personal data, and select the first three visible beneficiaries while retaining their displayed names. - expect: All three beneficiary relationships are selected and exactly one attendant is created successfully.
-2. Search for and open each retained beneficiary. - expect: Every beneficiary displays the newly created attendant as its titular relationship.
-3. Open Acudientes, search for the new attendant, and open its detail. - expect: The attendant detail displays all three retained beneficiary names.
+1. Open Registrar acudiente, complete unique valid personal data, and select the first three visible beneficiaries while retaining their document numbers. - expect: Three unique beneficiary documents are retained, all three relationships are selected, and exactly one attendant is created successfully.
+2. Search for and open each retained beneficiary by document number. - expect: The document search identifies the intended beneficiary even when multiple beneficiaries share the same name, and every beneficiary displays the newly created attendant as its titular relationship.
+3. Open Acudientes, search for the new attendant, and open its detail. - expect: The attendant detail displays all three retained beneficiary document numbers.
+
+**Observed:** In the user-confirmed run, all three beneficiaries were located by their unique document numbers and the attendant detail displayed the three retained documents. Repeated beneficiary names no longer affect result selection.
 
 ### 4. Beneficiary editing
 

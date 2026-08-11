@@ -17,6 +17,11 @@ export type SelectedBeneficiary = {
   name: string;
 };
 
+export type SelectedBeneficiaryWithDocument = {
+  id: string;
+  documentNumber: string;
+};
+
 export class AttendantFormPage extends BasePage {
   readonly attendantsTabButton: Locator;
   readonly beneficiariesNavigationButton: Locator;
@@ -303,6 +308,56 @@ export class AttendantFormPage extends BasePage {
       }
 
       selectedBeneficiaries.push({ id: beneficiaryId, name: beneficiaryName });
+    }
+
+    for (const beneficiary of selectedBeneficiaries) {
+      await this.selectBeneficiary(beneficiary.id);
+    }
+
+    return selectedBeneficiaries;
+  }
+
+  async selectFirstBeneficiariesAndGetDocuments(
+    count: number,
+  ): Promise<SelectedBeneficiaryWithDocument[]> {
+    const beneficiaryCheckboxes = this.form
+      .locator('[test-id^="attendants-beneficiaries-checkbox-"]')
+      .filter({ visible: true });
+
+    await beneficiaryCheckboxes.first().waitFor({ state: "visible" });
+
+    if ((await beneficiaryCheckboxes.count()) < count) {
+      throw new Error(`Fewer than ${count} beneficiaries are available.`);
+    }
+
+    const selectedBeneficiaries: SelectedBeneficiaryWithDocument[] = [];
+
+    for (let index = 0; index < count; index += 1) {
+      const checkbox = beneficiaryCheckboxes.nth(index);
+      const checkboxTestId = await checkbox.getAttribute("test-id");
+      const beneficiaryId = checkboxTestId?.replace(
+        "attendants-beneficiaries-checkbox-",
+        "",
+      );
+
+      if (!beneficiaryId) {
+        throw new Error(`Beneficiary checkbox ${index + 1} has no ID.`);
+      }
+
+      const beneficiaryRowText =
+        await this.beneficiaryRow(beneficiaryId).innerText();
+      const documentNumber = beneficiaryRowText.match(/\b\d{5,}\b/)?.[0];
+
+      if (!documentNumber) {
+        throw new Error(
+          `Beneficiary row ${beneficiaryId} has no visible document number.`,
+        );
+      }
+
+      selectedBeneficiaries.push({
+        id: beneficiaryId,
+        documentNumber,
+      });
     }
 
     for (const beneficiary of selectedBeneficiaries) {

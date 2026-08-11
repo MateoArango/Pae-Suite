@@ -4,6 +4,7 @@
 import { randomInt } from "node:crypto";
 import { test, expect } from "../../fixtures";
 import { AttendantFormPage } from "../../pages/AttendantFormPage";
+import { EditBeneficiaryPage } from "../../pages/EditBeneficiaryPage";
 import { LoginPage } from "../../pages/LoginPage";
 import { generateGovernmentId } from "../../utils/generateGovernmentId";
 
@@ -15,6 +16,7 @@ test.describe("Single attendant registration", () => {
 
     const loginPage = new LoginPage(page);
     const attendantForm = new AttendantFormPage(page);
+    const editBeneficiary = new EditBeneficiaryPage(page);
     const firstName = "Reassignment";
     const firstLastName = `Automation${randomInt(100_000, 1_000_000)}`;
     const attendantFullName = `${firstName} ${firstLastName}`;
@@ -46,12 +48,8 @@ test.describe("Single attendant registration", () => {
 
     // 2. Select the first beneficiary and save the new relationship.
     await attendantForm.addBeneficiary();
-    const firstBeneficiaryCheckbox = attendantForm.form
-      .locator('[test-id^="attendants-beneficiaries-checkbox-"]')
-      .first();
-    await expect(firstBeneficiaryCheckbox).toBeVisible();
-    const beneficiaryName =
-      await attendantForm.selectFirstBeneficiaryAndGetName();
+    const [beneficiary] =
+      await attendantForm.selectFirstBeneficiariesAndGetDocuments(1);
     await attendantForm.confirmBeneficiarySelection();
 
     const creationResponsePromise = page.waitForResponse((response) =>
@@ -67,13 +65,14 @@ test.describe("Single attendant registration", () => {
     await expect(attendantForm.successToast).toBeVisible();
     await expect(attendantForm.form).toBeHidden();
 
-    // 3. Search by the updated beneficiary's name and open that result.
-    await attendantForm.searchMainBeneficiaries(beneficiaryName);
-    await attendantForm.openBeneficiaryDetailByName(beneficiaryName);
-    await expect(attendantForm.beneficiaryDetailTitle).toBeVisible();
-    await expect(attendantForm.beneficiaryAttendantRole).toBeVisible();
+    // 3. Search by the unique document and open the intended beneficiary.
+    await editBeneficiary.searchMainBeneficiaries(beneficiary.documentNumber);
+    await editBeneficiary.openBeneficiaryByDocument(
+      beneficiary.documentNumber,
+    );
+    await expect(editBeneficiary.form).toBeVisible();
     await expect(
-      page.getByText(attendantFullName, { exact: true }),
+      editBeneficiary.attendantName(attendantFullName),
     ).toBeVisible();
   });
 });

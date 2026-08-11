@@ -147,6 +147,10 @@ export class EditBeneficiaryPage extends BasePage {
     await this.beneficiaryRecord(beneficiaryName).click();
   }
 
+  async openBeneficiaryByDocument(documentNumber: string): Promise<void> {
+    await this.page.getByText(documentNumber, { exact: false }).click();
+  }
+
   async associateAttendant(attendantName: string): Promise<void> {
     await this.openAddAttendantButton.click();
     await this.attendantSearchInput.fill(attendantName);

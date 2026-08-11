@@ -56,10 +56,12 @@ test.describe("Single attendant registration", () => {
     });
     await attendantForm.addBeneficiary();
     const selectedBeneficiaries =
-      await attendantForm.selectFirstBeneficiariesAndGetNames(3);
-    const beneficiaryNames = selectedBeneficiaries.map(({ name }) => name);
+      await attendantForm.selectFirstBeneficiariesAndGetDocuments(3);
+    const beneficiaryDocuments = selectedBeneficiaries.map(
+      ({ documentNumber }) => documentNumber,
+    );
 
-    expect(new Set(beneficiaryNames).size).toBe(3);
+    expect(new Set(beneficiaryDocuments).size).toBe(3);
     await expect(attendantForm.confirmBeneficiarySelectionButton).toBeEnabled();
     await attendantForm.confirmBeneficiarySelection();
 
@@ -87,9 +89,13 @@ test.describe("Single attendant registration", () => {
     await expect(attendantForm.form).toBeHidden();
 
     // 2. Search each saved beneficiary and verify the attendant relationship.
-    for (const beneficiaryName of beneficiaryNames) {
-      await editBeneficiary.searchMainBeneficiaries(beneficiaryName);
-      await editBeneficiary.openBeneficiary(beneficiaryName);
+    for (const beneficiary of selectedBeneficiaries) {
+      await editBeneficiary.searchMainBeneficiaries(
+        beneficiary.documentNumber,
+      );
+      await editBeneficiary.openBeneficiaryByDocument(
+        beneficiary.documentNumber,
+      );
       await expect(editBeneficiary.form).toBeVisible();
       await expect(
         editBeneficiary.attendantName(attendantFullName),
@@ -106,9 +112,9 @@ test.describe("Single attendant registration", () => {
     await attendantItem.click();
     await expect(attendantForm.attendantDetailTitle).toBeVisible();
 
-    for (const beneficiaryName of beneficiaryNames) {
+    for (const beneficiaryDocument of beneficiaryDocuments) {
       await expect(
-        attendantForm.form.getByText(beneficiaryName, { exact: true }),
+        attendantForm.form.getByText(beneficiaryDocument, { exact: false }),
       ).toBeVisible();
     }
 
