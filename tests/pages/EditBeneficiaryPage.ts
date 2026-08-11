@@ -28,6 +28,11 @@ export class EditBeneficiaryPage extends BasePage {
   readonly attendantDetailTitle: Locator;
   readonly closeAttendantDetailButton: Locator;
   readonly updateSuccessToast: Locator;
+  readonly deleteConfirmationDialog: Locator;
+  readonly deleteConfirmationTitle: Locator;
+  readonly closeDeleteConfirmationButton: Locator;
+  readonly cancelDeleteButton: Locator;
+  readonly confirmDeleteButton: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -110,6 +115,38 @@ export class EditBeneficiaryPage extends BasePage {
       "El estudiante ha sido actualizado correctamente.",
       { exact: true },
     );
+    this.deleteConfirmationDialog = page.locator("app-confirm-dialog").filter({
+      has: page.getByRole("heading", {
+        name: "Confirma eliminar",
+        exact: true,
+      }),
+    });
+    this.deleteConfirmationTitle = this.deleteConfirmationDialog.getByRole(
+      "heading",
+      {
+        name: "Confirma eliminar",
+        exact: true,
+      },
+    );
+    this.closeDeleteConfirmationButton =
+      this.deleteConfirmationDialog.getByRole("button", {
+        name: "Cerrar",
+        exact: true,
+      });
+    this.cancelDeleteButton = this.deleteConfirmationDialog.getByRole(
+      "button",
+      {
+        name: "Cancelar",
+        exact: true,
+      },
+    );
+    this.confirmDeleteButton = this.deleteConfirmationDialog.getByRole(
+      "button",
+      {
+        name: "Eliminar",
+        exact: true,
+      },
+    );
   }
 
   beneficiaryRecord(beneficiaryName: string): Locator {
@@ -121,7 +158,14 @@ export class EditBeneficiaryPage extends BasePage {
 
   deletionSuccessToast(beneficiaryName: string): Locator {
     return this.page.getByText(
-      `El estudiante ${beneficiaryName} ha sido eliminado correctamente`,
+      `El estudiante ${beneficiaryName} ha sido eliminado correctamente.`,
+      { exact: true },
+    );
+  }
+
+  deleteConfirmationMessage(beneficiaryName: string): Locator {
+    return this.deleteConfirmationDialog.getByText(
+      `¿Estás seguro de eliminar al estudiante ${beneficiaryName}?`,
       { exact: true },
     );
   }
@@ -196,6 +240,13 @@ export class EditBeneficiaryPage extends BasePage {
   isUpdateBeneficiaryCall(url: string, method: string): boolean {
     return (
       method === "PATCH" &&
+      /^\/v1\.0\/beneficiaries\/\d+$/.test(new URL(url).pathname)
+    );
+  }
+
+  isDeleteBeneficiaryCall(url: string, method: string): boolean {
+    return (
+      method === "DELETE" &&
       /^\/v1\.0\/beneficiaries\/\d+$/.test(new URL(url).pathname)
     );
   }

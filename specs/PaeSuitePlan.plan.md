@@ -270,7 +270,7 @@
 2. Clear the required first name, first surname, document number, grade, group, and population type, then attempt to save. - expect: The form remains open, required controls expose validation feedback, and no update request is sent.
 3. Restore the required fields incrementally. - expect: Restored controls clear their invalid state while unresolved required controls remain invalid.
 
-#### 4.3. BEN-EDIT-003 — Cancel editing without saving changes
+#### 4.3. BEN-EDIT-003 — Cancel editing without saving changesg✅
 
 **Planned file:** `tests/Beneficiary/edit-beneficiary/edit-beneficiary-cancel.spec.ts`
 
@@ -281,17 +281,7 @@
 3. Search for and reopen the same beneficiary. - expect: The original persisted values are displayed and the unsaved changes are absent.
 4. Repeat the unsaved edit and close it with the header back button. - expect: No update request is sent and the original values remain persisted after reopening.
 
-#### 4.4. BEN-EDIT-004 — Associate or replace the beneficiary's attendant
-
-**Planned file:** `tests/Beneficiary/edit-beneficiary/edit-beneficiary-attendant.spec.ts`
-
-**Steps:**
-
-1. Create a unique beneficiary without an attendant and identify a deterministic attendant that the test may associate. - expect: The beneficiary and attendant preconditions are available without modifying another scenario's records.
-2. Open the beneficiary, enable editing, search for the attendant, select it, and save the relationship. - expect: The update succeeds and `El estudiante ha sido actualizado correctamente.` is displayed.
-3. Close and reopen the beneficiary. - expect: The selected attendant persists as the beneficiary's titular relationship and its detail can be opened.
-
-#### 4.5. BEN-EDIT-005 — Prevent a duplicate beneficiary document during editing
+#### 4.5. BEN-EDIT-005 — Prevent a duplicate beneficiary document during editing 🐛 FIX ME
 
 **Planned file:** `tests/Beneficiary/edit-beneficiary/edit-beneficiary-duplicate-document.spec.ts`
 
@@ -301,7 +291,7 @@
 2. Open the first beneficiary and attempt to replace its document number with the second beneficiary's document number. - expect: The update is rejected by the beneficiary-update endpoint with the observed duplicate-document response.
 3. Reopen both beneficiaries. - expect: Neither persisted record was overwritten or duplicated, and the first beneficiary retains its original document number.
 
-#### 4.6. BEN-EDIT-006 — Delete a beneficiary created by the test
+#### 4.6. BEN-EDIT-006 — Delete a beneficiary created by the test✅
 
 **Planned file:** `tests/Beneficiary/edit-beneficiary/delete-beneficiary.spec.ts`
 
@@ -309,7 +299,11 @@
 
 1. Create a beneficiary with a unique document number and retain its generated full name. - expect: The beneficiary exists and can be found through the main Beneficiarios search.
 2. Open the beneficiary, enable editing, and click Eliminar estudiante. - expect: The deletion flow is initiated for the selected beneficiary only; handle and verify a confirmation dialog if the application displays one.
-3. Confirm deletion and observe the network operation. - expect: Exactly one successful beneficiary-delete request occurs and `El estudiante <beneficiaryName> ha sido eliminado correctamente` is displayed using the retained full name.
+3. Confirm deletion and observe the network operation. - expect: Exactly one successful beneficiary-delete request occurs and `El estudiante <beneficiaryName> ha sido eliminado correctamente.` is displayed using the retained full name.
 4. Search again by the deleted beneficiary's document number. - expect: `No se encontraron beneficiarios que coincidan con los filtros` is displayed and the deleted record cannot be reopened.
+
+metadata:
+  -DELETE: https://pae-beta-api.adacsc.co/v1.0/beneficiaries/601
+
 
 **Safety:** Never use a pre-existing shared-QA beneficiary for this scenario. If creation fails, skip the deletion action and fail during precondition setup.
