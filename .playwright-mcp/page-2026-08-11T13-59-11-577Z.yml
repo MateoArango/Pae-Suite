@@ -1,0 +1,240 @@
+- generic [ref=e61]:
+  - generic [ref=e62]:
+    - button "M" [ref=e64]
+    - navigation [ref=e66]:
+      - button "home" [ref=e67]:
+        - generic [ref=e70]: home
+      - generic [ref=e73]: Inicio
+      - button "hand_package" [ref=e74]:
+        - generic [ref=e77]: hand_package
+      - generic [ref=e80]: Servicio
+      - button "solo_dining" [ref=e81]:
+        - generic [ref=e84]: solo_dining
+      - generic [ref=e87]: Beneficiarios
+      - button "receipt_long" [ref=e88]:
+        - generic [ref=e91]: receipt_long
+      - generic [ref=e94]: Reportes
+    - generic [ref=e95]:
+      - button "Abrir formulario de comentarios" [ref=e96] [cursor=pointer]:
+        - generic [ref=e97]: flag_2
+      - button "Cerrar sesión" [ref=e100] [cursor=pointer]:
+        - generic [ref=e101]: logout
+  - generic [ref=e104]:
+    - generic [ref=e105]:
+      - generic [ref=e109]:
+        - generic [ref=e110]: Buenos días, Mateo Ada
+        - generic [ref=e111]: "| -"
+      - generic [ref=e112]:
+        - generic [ref=e113] [cursor=pointer]:
+          - generic [ref=e114]: translate
+          - generic [ref=e115]: ES
+        - button "Aurora" [ref=e117] [cursor=pointer]:
+          - progressbar "Loading" [ref=e120]:
+            - img [ref=e121]
+          - generic [ref=e124]: Aurora
+        - button "Ver alertas" [ref=e125] [cursor=pointer]:
+          - generic [ref=e126]: notifications
+          - text: Ver alertas
+    - generic [ref=e127]:
+      - generic [ref=e132]:
+        - generic [ref=e136]:
+          - generic [ref=e137]:
+            - generic [ref=e138]:
+              - generic [ref=e139]:
+                - img "Progreso 0%" [ref=e143]:
+                  - generic [ref=e148]: 0%
+                - generic [ref=e149]:
+                  - paragraph [ref=e150]: Raciones entregadas
+                  - paragraph [ref=e151]: Hoy | martes 11
+                  - generic [ref=e152]:
+                    - heading "0" [level=2] [ref=e153]
+                    - paragraph [ref=e154]: / 100 meta
+              - generic [ref=e155]:
+                - button "Agregar incidencia" [ref=e157] [cursor=pointer]:
+                  - generic [ref=e158]: release_alert
+                  - generic [ref=e159]: Agregar incidencia
+                - generic [ref=e161]:
+                  - button "Generar reporte" [ref=e162]:
+                    - generic [ref=e165]: Generar reporte
+                  - button "Abrir opciones" [ref=e168]:
+                    - generic [ref=e171]: expand_more
+            - generic [ref=e174]:
+              - generic [ref=e175]:
+                - generic [ref=e176]:
+                  - heading "Servicios del dia" [level=3] [ref=e177]
+                  - button "arrow_outward" [ref=e178] [cursor=pointer]:
+                    - generic [ref=e179]: arrow_outward
+                - article [ref=e181]:
+                  - paragraph [ref=e182]: No se encontraron
+                  - paragraph [ref=e183]: servicios programados
+              - generic [ref=e184]:
+                - article [ref=e185]:
+                  - text: 0 g
+                  - generic [ref=e186]: Peso promedio
+                - article [ref=e187]:
+                  - generic [ref=e188]:
+                    - text: "384"
+                    - generic [ref=e189]: Inasistencias
+                    - generic [ref=e190]: registradas
+                  - generic:
+                    - img "niño-morrongo"
+                - button "Ver lista" [ref=e191]:
+                  - generic [ref=e192]: Ver lista
+          - generic [ref=e195]:
+            - generic [ref=e196]:
+              - heading "Entregas por minuto" [level=4] [ref=e197]
+              - generic [ref=e198]:
+                - button "Bloque anterior" [ref=e199] [cursor=pointer]: ‹
+                - generic [ref=e200]: 11/08 07:58 - 08:58
+                - button "Bloque siguiente" [disabled] [ref=e201]: ›
+            - generic [ref=e202]:
+              - article [ref=e203]:
+                - generic [ref=e204]: "0"
+                - generic [ref=e205]: Totales
+              - article [ref=e206]:
+                - generic [ref=e207]: "0"
+                - generic [ref=e208]: Maximas
+              - article [ref=e209]:
+                - generic [ref=e210]: "0"
+                - generic [ref=e211]: Minimas
+              - article [ref=e212]:
+                - generic [ref=e213]: "0"
+                - generic [ref=e214]: Prom/min
+        - complementary [ref=e219]:
+          - generic [ref=e222]:
+            - generic [ref=e224]:
+              - generic [ref=e225]:
+                - button "arrow_back" [ref=e226] [cursor=pointer]:
+                  - generic [ref=e227]: arrow_back
+                - strong [ref=e228]: ago de 2026
+                - button "arrow_forward" [disabled] [ref=e229]:
+                  - generic [ref=e230]: arrow_forward
+              - generic [ref=e231]:
+                - generic [ref=e232]: L
+                - generic [ref=e233]: M
+                - generic [ref=e234]: M
+                - generic [ref=e235]: J
+                - generic [ref=e236]: V
+                - generic [ref=e237]: S
+                - generic [ref=e238]: D
+              - generic [ref=e239]:
+                - button "27" [disabled] [ref=e240]:
+                  - generic [ref=e241]: "27"
+                - button "28" [disabled] [ref=e242]:
+                  - generic [ref=e243]: "28"
+                - button "29" [disabled] [ref=e244]:
+                  - generic [ref=e245]: "29"
+                - button "30" [disabled] [ref=e246]:
+                  - generic [ref=e247]: "30"
+                - button "31" [disabled] [ref=e248]:
+                  - generic [ref=e249]: "31"
+                - button "1" [ref=e250] [cursor=pointer]:
+                  - generic [ref=e251]: "1"
+                - button "2" [ref=e252] [cursor=pointer]:
+                  - generic [ref=e253]: "2"
+                - button "3" [ref=e254] [cursor=pointer]:
+                  - generic [ref=e255]: "3"
+                - button "4" [ref=e256] [cursor=pointer]:
+                  - generic [ref=e257]: "4"
+                - button "5" [ref=e258] [cursor=pointer]:
+                  - generic [ref=e259]: "5"
+                - button "6" [ref=e260] [cursor=pointer]:
+                  - generic [ref=e261]: "6"
+                - button "7" [ref=e262] [cursor=pointer]:
+                  - generic [ref=e263]: "7"
+                - button "8" [ref=e264] [cursor=pointer]:
+                  - generic [ref=e265]: "8"
+                - button "9" [ref=e266] [cursor=pointer]:
+                  - generic [ref=e267]: "9"
+                - button "10" [ref=e268] [cursor=pointer]:
+                  - generic [ref=e269]: "10"
+                - button "11" [ref=e270] [cursor=pointer]:
+                  - generic [ref=e271]: "11"
+                - button "12" [disabled] [ref=e272] [cursor=pointer]:
+                  - generic [ref=e273]: "12"
+                - button "13" [disabled] [ref=e274] [cursor=pointer]:
+                  - generic [ref=e275]: "13"
+                - button "14" [disabled] [ref=e276] [cursor=pointer]:
+                  - generic [ref=e277]: "14"
+                - button "15" [disabled] [ref=e278] [cursor=pointer]:
+                  - generic [ref=e279]: "15"
+                - button "16" [disabled] [ref=e280] [cursor=pointer]:
+                  - generic [ref=e281]: "16"
+                - button "17" [disabled] [ref=e282] [cursor=pointer]:
+                  - generic [ref=e283]: "17"
+                - button "18" [disabled] [ref=e284] [cursor=pointer]:
+                  - generic [ref=e285]: "18"
+                - button "19" [disabled] [ref=e286] [cursor=pointer]:
+                  - generic [ref=e287]: "19"
+                - button "20" [disabled] [ref=e288] [cursor=pointer]:
+                  - generic [ref=e289]: "20"
+                - button "21" [disabled] [ref=e290] [cursor=pointer]:
+                  - generic [ref=e291]: "21"
+                - button "22" [disabled] [ref=e292] [cursor=pointer]:
+                  - generic [ref=e293]: "22"
+                - button "23" [disabled] [ref=e294] [cursor=pointer]:
+                  - generic [ref=e295]: "23"
+                - button "24" [disabled] [ref=e296] [cursor=pointer]:
+                  - generic [ref=e297]: "24"
+                - button "25" [disabled] [ref=e298] [cursor=pointer]:
+                  - generic [ref=e299]: "25"
+                - button "26" [disabled] [ref=e300] [cursor=pointer]:
+                  - generic [ref=e301]: "26"
+                - button "27" [disabled] [ref=e302] [cursor=pointer]:
+                  - generic [ref=e303]: "27"
+                - button "28" [disabled] [ref=e304] [cursor=pointer]:
+                  - generic [ref=e305]: "28"
+                - button "29" [disabled] [ref=e306] [cursor=pointer]:
+                  - generic [ref=e307]: "29"
+                - button "30" [disabled] [ref=e308] [cursor=pointer]:
+                  - generic [ref=e309]: "30"
+                - button "31" [disabled] [ref=e310] [cursor=pointer]:
+                  - generic [ref=e311]: "31"
+                - button "1" [disabled] [ref=e312]:
+                  - generic [ref=e313]: "1"
+                - button "2" [disabled] [ref=e314]:
+                  - generic [ref=e315]: "2"
+                - button "3" [disabled] [ref=e316]:
+                  - generic [ref=e317]: "3"
+                - button "4" [disabled] [ref=e318]:
+                  - generic [ref=e319]: "4"
+                - button "5" [disabled] [ref=e320]:
+                  - generic [ref=e321]: "5"
+                - button "6" [disabled] [ref=e322]:
+                  - generic [ref=e323]: "6"
+            - generic [ref=e324]:
+              - button "Día" [ref=e325]:
+                - generic [ref=e327]: Día
+              - button "Semana" [ref=e330]:
+                - generic [ref=e332]: Semana
+              - button "Mes" [ref=e335]:
+                - generic [ref=e337]: Mes
+            - generic [ref=e340]:
+              - article [ref=e341]:
+                - generic [ref=e342]:
+                  - text: "0"
+                  - generic [ref=e344]: Entregas
+              - article [ref=e345]:
+                - generic [ref=e346]:
+                  - text: "384"
+                  - generic [ref=e348]: Inasistencias
+          - generic [ref=e351]:
+            - heading "Tus tareas" [level=3] [ref=e353]
+            - generic [ref=e354]:
+              - article [ref=e355]:
+                - generic [ref=e356]:
+                  - generic [ref=e357]:
+                    - heading "0" [level=4] [ref=e358]
+                    - paragraph [ref=e359]: Estudiantes enrolados
+                  - button "arrow_outward" [ref=e360]:
+                    - generic [ref=e362]: arrow_outward
+                - generic [ref=e365]:
+                  - progressbar "Progreso 0%" [ref=e368]
+                  - generic [ref=e370]: 0% de enrolamiento
+              - article [ref=e371] [cursor=pointer]:
+                - generic [ref=e372]:
+                  - heading "0" [level=4] [ref=e373]
+                  - paragraph [ref=e374]: Entregas por verificar
+                - button "arrow_outward" [ref=e375]:
+                  - generic [ref=e376]: arrow_outward
+      - generic "Arrastrar para cambiar el ancho" [ref=e378]

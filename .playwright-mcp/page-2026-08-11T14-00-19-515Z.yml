@@ -1,0 +1,255 @@
+- generic [ref=e61]:
+  - generic [ref=e62]:
+    - button "M" [ref=e64]
+    - navigation [ref=e66]:
+      - button "home" [ref=e67]:
+        - generic [ref=e70]: home
+      - generic [ref=e73]: Inicio
+      - button "hand_package" [ref=e74]:
+        - generic [ref=e77]: hand_package
+      - generic [ref=e80]: Servicio
+      - button "solo_dining" [ref=e81]:
+        - generic [ref=e84]: solo_dining
+      - generic [ref=e87]: Beneficiarios
+      - button "receipt_long" [ref=e88]:
+        - generic [ref=e91]: receipt_long
+      - generic [ref=e94]: Reportes
+    - generic [ref=e95]:
+      - button "Abrir formulario de comentarios" [ref=e96] [cursor=pointer]:
+        - generic [ref=e97]: flag_2
+      - button "Cerrar sesión" [ref=e100] [cursor=pointer]:
+        - generic [ref=e101]: logout
+  - generic [ref=e104]:
+    - generic [ref=e105]:
+      - generic [ref=e109]:
+        - generic [ref=e110]: Buenos días, Mateo Ada
+        - generic [ref=e111]: "| -"
+      - generic [ref=e112]:
+        - generic [ref=e113] [cursor=pointer]:
+          - generic [ref=e114]: translate
+          - generic [ref=e115]: ES
+        - button "Aurora" [ref=e117] [cursor=pointer]:
+          - progressbar "Loading" [ref=e120]:
+            - img [ref=e121]
+          - generic [ref=e124]: Aurora
+        - button "Ver alertas" [ref=e125] [cursor=pointer]:
+          - generic [ref=e126]: notifications
+          - text: Ver alertas
+    - generic [ref=e127]:
+      - generic [ref=e408]:
+        - generic [ref=e409]:
+          - generic [ref=e410]:
+            - generic [ref=e411]:
+              - paragraph [ref=e412]: Beneficiarios
+              - paragraph [ref=e413]: "384"
+            - generic [ref=e415]:
+              - generic [ref=e416] [cursor=pointer]:
+                - generic [ref=e417]:
+                  - text: "0"
+                  - paragraph [ref=e418]: Enrolados
+                - generic [ref=e419]: north_east
+              - generic [ref=e420] [cursor=pointer]:
+                - generic [ref=e421]:
+                  - text: "15"
+                  - paragraph [ref=e422]: Acudientes
+                - generic [ref=e423]: north_east
+              - generic [ref=e424] [cursor=pointer]:
+                - generic [ref=e425]:
+                  - text: "384"
+                  - paragraph [ref=e426]: Sin enrolar
+                - generic [ref=e427]: north_east
+          - generic [ref=e428]:
+            - generic [ref=e432] [cursor=pointer]:
+              - generic [ref=e433]: Grado
+              - generic [ref=e434]: arrow_drop_down
+            - generic [ref=e438] [cursor=pointer]:
+              - generic [ref=e439]: Estado
+              - generic [ref=e440]: arrow_drop_down
+            - generic [ref=e445] [cursor=pointer]: Ausentes
+            - generic [ref=e446] [cursor=pointer]:
+              - text: Más recientes
+              - generic [ref=e447]: arrow_drop_down
+            - generic [ref=e448]:
+              - button "Abrir barra de búsqueda" [ref=e451] [cursor=pointer]:
+                - img [ref=e452]: search
+              - generic [ref=e455]:
+                - paragraph [ref=e456]: 384 resultados
+                - paragraph [ref=e457]: 1 - 10 de 384 beneficiarios
+          - generic [ref=e458]:
+            - generic [ref=e461] [cursor=pointer]:
+              - generic [ref=e462]:
+                - generic [ref=e463]: MF
+                - generic [ref=e464]:
+                  - heading "Mateo firstname Arango lastname" [level=3] [ref=e465]
+                  - paragraph [ref=e466]: C.C. 323152 • 2-c
+                  - generic [ref=e468]: No enrolado
+              - button "Más opciones" [ref=e469]:
+                - generic [ref=e470]: chevron_forward
+            - generic [ref=e473] [cursor=pointer]:
+              - generic [ref=e474]:
+                - generic [ref=e475]: FN
+                - generic [ref=e476]:
+                  - heading "Felipe Neri" [level=3] [ref=e477]
+                  - paragraph [ref=e478]: C.C. 545576399181356 • 5-a
+                  - generic [ref=e480]: No enrolado
+              - button "Más opciones" [ref=e481]:
+                - generic [ref=e482]: chevron_forward
+            - generic [ref=e485] [cursor=pointer]:
+              - generic [ref=e486]:
+                - generic [ref=e487]: MP
+                - generic [ref=e488]:
+                  - heading "Mateo Prueba" [level=3] [ref=e489]
+                  - paragraph [ref=e490]: C.C. 145575836815266 • 5-a
+                  - generic [ref=e492]: No enrolado
+              - button "Más opciones" [ref=e493]:
+                - generic [ref=e494]: chevron_forward
+            - generic [ref=e497] [cursor=pointer]:
+              - generic [ref=e498]:
+                - generic [ref=e499]: SA
+                - generic [ref=e500]:
+                  - heading "Sharedtwo Automation554720" [level=3] [ref=e501]
+                  - paragraph [ref=e502]: C.C. 445573709605175 • 5-b
+                  - generic [ref=e504]: No enrolado
+              - button "Más opciones" [ref=e505]:
+                - generic [ref=e506]: chevron_forward
+            - generic [ref=e509] [cursor=pointer]:
+              - generic [ref=e510]:
+                - generic [ref=e511]: SA
+                - generic [ref=e512]:
+                  - heading "Sharedone Automation554720" [level=3] [ref=e513]
+                  - paragraph [ref=e514]: C.C. 445573588216484 • 5-a
+                  - generic [ref=e516]: No enrolado
+              - button "Más opciones" [ref=e517]:
+                - generic [ref=e518]: chevron_forward
+            - generic [ref=e521] [cursor=pointer]:
+              - generic [ref=e522]:
+                - generic [ref=e523]: SA
+                - generic [ref=e524]:
+                  - heading "Sharedtwo Automation582246" [level=3] [ref=e525]
+                  - paragraph [ref=e526]: C.C. 145560435363557 • 5-b
+                  - generic [ref=e528]: No enrolado
+              - button "Más opciones" [ref=e529]:
+                - generic [ref=e530]: chevron_forward
+            - generic [ref=e533] [cursor=pointer]:
+              - generic [ref=e534]:
+                - generic [ref=e535]: SA
+                - generic [ref=e536]:
+                  - heading "Sharedone Automation582246" [level=3] [ref=e537]
+                  - paragraph [ref=e538]: C.C. 645560314696302 • 5-a
+                  - generic [ref=e540]: No enrolado
+              - button "Más opciones" [ref=e541]:
+                - generic [ref=e542]: chevron_forward
+            - generic [ref=e545] [cursor=pointer]:
+              - generic [ref=e546]:
+                - generic [ref=e547]: SA
+                - generic [ref=e548]:
+                  - heading "Sharedtwo Automation376418" [level=3] [ref=e549]
+                  - paragraph [ref=e550]: C.C. 945409229345687 • 5-b
+                  - generic [ref=e552]: No enrolado
+              - button "Más opciones" [ref=e553]:
+                - generic [ref=e554]: chevron_forward
+            - generic [ref=e557] [cursor=pointer]:
+              - generic [ref=e558]:
+                - generic [ref=e559]: SA
+                - generic [ref=e560]:
+                  - heading "Sharedone Automation376418" [level=3] [ref=e561]
+                  - paragraph [ref=e562]: C.C. 745408026303932 • 5-a
+                  - generic [ref=e564]: No enrolado
+              - button "Más opciones" [ref=e565]:
+                - generic [ref=e566]: chevron_forward
+            - generic [ref=e569] [cursor=pointer]:
+              - generic [ref=e570]:
+                - generic [ref=e571]: SA
+                - generic [ref=e572]:
+                  - heading "Sharedtwo Automation498470" [level=3] [ref=e573]
+                  - paragraph [ref=e574]: C.C. 645403784270339 • 5-b
+                  - generic [ref=e576]: No enrolado
+              - button "Más opciones" [ref=e577]:
+                - generic [ref=e578]: chevron_forward
+          - generic [ref=e580]:
+            - button "Pagina anterior" [disabled] [ref=e581]:
+              - generic [ref=e582]: chevron_left
+            - generic [ref=e583]:
+              - button "1" [ref=e584] [cursor=pointer]
+              - button "2" [ref=e585] [cursor=pointer]
+              - button "3" [ref=e586] [cursor=pointer]
+              - button "4" [ref=e587] [cursor=pointer]
+              - button "5" [ref=e588] [cursor=pointer]
+            - button "Pagina siguiente" [ref=e589] [cursor=pointer]:
+              - generic [ref=e590]: chevron_right
+        - generic [ref=e592]:
+          - button "Abrir menú de acciones" [expanded] [ref=e593] [cursor=pointer]:
+            - img [ref=e595]
+          - generic [ref=e598]:
+            - button "Registro único" [ref=e599] [cursor=pointer]:
+              - generic [ref=e600]: Registro único
+            - button "Registro masivo" [ref=e601] [cursor=pointer]:
+              - generic [ref=e602]: Registro masivo
+      - generic [ref=e603]:
+        - generic "Arrastrar para cambiar el ancho" [ref=e604]
+        - generic [ref=e608]:
+          - generic [ref=e610]:
+            - button "Cerrar" [ref=e611] [cursor=pointer]:
+              - generic [ref=e612]: close
+            - paragraph [ref=e615]: Registrar estudiante
+          - generic [ref=e616]:
+            - paragraph [ref=e617]: Información personal
+            - generic [ref=e618]:
+              - generic [ref=e621]:
+                - generic [ref=e622]:
+                  - text: Primer nombre
+                  - generic [ref=e623]: "*"
+                - textbox "Primer nombre" [ref=e625]: Benedit
+              - generic [ref=e629]:
+                - generic [ref=e630]: Segundo nombre
+                - textbox "Segundo nombre" [ref=e632]: Inicial
+              - generic [ref=e636]:
+                - generic [ref=e637]:
+                  - text: Primer apellido
+                  - generic [ref=e638]: "*"
+                - textbox "Primer apellido" [ref=e640]: Automation
+              - generic [ref=e644]:
+                - generic [ref=e645]: Segundo apellido
+                - textbox "Segundo apellido" [ref=e647]: Original
+            - generic [ref=e651] [cursor=pointer]:
+              - generic [ref=e652]:
+                - text: Tipo de documento
+                - generic [ref=e653]: "*"
+              - combobox "Tipo de documento" [ref=e655]:
+                - generic [ref=e656]:
+                  - generic [ref=e744]: Cédula de Ciudadanía
+                  - img [ref=e661]
+            - generic [ref=e666]:
+              - generic [ref=e667]:
+                - text: Número de documento
+                - generic [ref=e668]: "*"
+              - textbox "Número de documento" [ref=e670]: "81120261359001"
+            - paragraph [ref=e672]: Nivel de escolaridad
+            - generic [ref=e673]:
+              - generic [ref=e676] [cursor=pointer]:
+                - generic [ref=e677]:
+                  - text: Grado
+                  - generic [ref=e678]: "*"
+                - combobox "Grado" [ref=e680]:
+                  - generic [ref=e681]:
+                    - generic [ref=e770]: Quinto
+                    - img [ref=e686]
+              - generic [ref=e691]:
+                - generic [ref=e692]:
+                  - text: Grupo
+                  - generic [ref=e693]: "*"
+                - textbox "Grupo" [ref=e695]: a
+            - paragraph [ref=e697]: Clasificación del beneficiario
+            - generic [ref=e700] [cursor=pointer]:
+              - generic [ref=e701]:
+                - text: Tipo de población
+                - generic [ref=e702]: "*"
+              - combobox "Tipo de población" [active] [ref=e704]:
+                - generic [ref=e705]:
+                  - generic [ref=e780]: No aplica
+                  - img [ref=e710]
+          - generic [ref=e713]:
+            - button "Cancelar" [ref=e714]:
+              - generic [ref=e715]: Cancelar
+            - button "Guardar" [ref=e718]:
+              - generic [ref=e719]: Guardar

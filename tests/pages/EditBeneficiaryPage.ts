@@ -1,5 +1,5 @@
-import { Locator, Page } from '@playwright/test';
-import { BasePage } from './BasePage';
+import { Locator, Page, Response } from "@playwright/test";
+import { BasePage } from "./BasePage";
 
 export class EditBeneficiaryPage extends BasePage {
   readonly form: Locator;
@@ -32,88 +32,88 @@ export class EditBeneficiaryPage extends BasePage {
   constructor(page: Page) {
     super(page);
 
-    this.form = page.getByTestId('form-beneficiaries-submit-beneficiaries');
+    this.form = page.getByTestId("form-beneficiaries-submit-beneficiaries");
     this.mainBeneficiarySearchInputLens = page.getByTestId(
-      'students-tab-search-beneficiaries',
+      "students-tab-search-beneficiaries",
     );
     this.mainBeneficiarySearchInput = page.getByTestId(
-      'interactive-searchbar-input',
+      "interactive-searchbar-input",
     );
     this.closeDialogButton = this.form.getByTestId(
-      'form-beneficiaries-close-dialog-beneficiaries',
+      "form-beneficiaries-close-dialog-beneficiaries",
     );
     this.saveHeaderButton = this.form.getByTestId(
-      'form-beneficiaries-save-header-edit-beneficiaries',
+      "form-beneficiaries-save-header-edit-beneficiaries",
     );
     this.enableEditButton = this.form.getByTestId(
-      'form-beneficiaries-enable-edit-beneficiaries',
+      "form-beneficiaries-enable-edit-beneficiaries",
     );
     this.firstNameInput = this.form.getByTestId(
-      'form-beneficiaries-input-first-name-beneficiaries',
+      "form-beneficiaries-input-first-name-beneficiaries",
     );
     this.secondNameInput = this.form.getByTestId(
-      'form-beneficiaries-input-second-name-beneficiaries',
+      "form-beneficiaries-input-second-name-beneficiaries",
     );
     this.firstLastNameInput = this.form.getByTestId(
-      'form-beneficiaries-input-first-last-name-beneficiaries',
+      "form-beneficiaries-input-first-last-name-beneficiaries",
     );
     this.secondLastNameInput = this.form.getByTestId(
-      'form-beneficiaries-input-second-last-name-beneficiaries',
+      "form-beneficiaries-input-second-last-name-beneficiaries",
     );
     this.documentTypeSelect = this.form.getByTestId(
-      'form-beneficiaries-select-document-type-beneficiaries',
+      "form-beneficiaries-select-document-type-beneficiaries",
     );
     this.documentNumberInput = this.form.getByTestId(
-      'form-beneficiaries-input-document-number-beneficiaries',
+      "form-beneficiaries-input-document-number-beneficiaries",
     );
     this.academicGradeSelect = this.form.getByTestId(
-      'form-beneficiaries-select-academic-grade-beneficiaries',
+      "form-beneficiaries-select-academic-grade-beneficiaries",
     );
     this.groupInput = this.form.getByTestId(
-      'form-beneficiaries-input-group-beneficiaries',
+      "form-beneficiaries-input-group-beneficiaries",
     );
     this.populationTypeSelect = this.form.getByTestId(
-      'form-beneficiaries-select-population-type-beneficiaries',
+      "form-beneficiaries-select-population-type-beneficiaries",
     );
     this.deleteBeneficiaryButton = this.form.getByTestId(
-      'form-beneficiaries-delete-beneficiary-beneficiaries',
+      "form-beneficiaries-delete-beneficiary-beneficiaries",
     );
     this.cancelFooterButton = this.form.getByTestId(
-      'form-beneficiaries-cancel-footer-beneficiaries',
+      "form-beneficiaries-cancel-footer-beneficiaries",
     );
     this.saveFooterButton = this.form.getByTestId(
-      'form-beneficiaries-save-footer-beneficiaries',
+      "form-beneficiaries-save-footer-beneficiaries",
     );
     this.openAddAttendantButton = this.form.getByTestId(
-      'form-beneficiaries-open-add-attendant-beneficiaries',
+      "form-beneficiaries-open-add-attendant-beneficiaries",
     );
     this.attendantSearchInput = this.form.getByTestId(
-      'selected-attendants-search-beneficiaries',
+      "selected-attendants-search-beneficiaries",
     );
     this.saveAttendantSelectionButton = this.form.getByTestId(
-      'form-beneficiaries-save-attendant-selection-beneficiaries',
+      "form-beneficiaries-save-attendant-selection-beneficiaries",
     );
     this.removePrimaryAttendantButton = this.form.getByTestId(
-      'form-beneficiaries-remove-attendant-titular-beneficiaries',
+      "form-beneficiaries-remove-attendant-titular-beneficiaries",
     );
     this.openPrimaryAttendantDetailButton = this.form.getByTestId(
-      'form-beneficiaries-open-attendant-titular-beneficiaries',
+      "form-beneficiaries-open-attendant-titular-beneficiaries",
     );
-    this.attendantDetailTitle = page.getByText('Detalle acudiente', {
+    this.attendantDetailTitle = page.getByText("Detalle acudiente", {
       exact: true,
     });
-    this.closeAttendantDetailButton = page.getByRole('button', {
-      name: 'Cerrar',
+    this.closeAttendantDetailButton = page.getByRole("button", {
+      name: "Cerrar",
       exact: true,
     });
     this.updateSuccessToast = page.getByText(
-      'El estudiante ha sido actualizado correctamente.',
+      "El estudiante ha sido actualizado correctamente.",
       { exact: true },
     );
   }
 
   beneficiaryRecord(beneficiaryName: string): Locator {
-    return this.page.getByRole('heading', {
+    return this.page.getByRole("heading", {
       name: beneficiaryName,
       exact: true,
     });
@@ -140,7 +140,7 @@ export class EditBeneficiaryPage extends BasePage {
     }
 
     await this.mainBeneficiarySearchInput.fill(searchTerm);
-    await this.mainBeneficiarySearchInput.press('Enter');
+    await this.mainBeneficiarySearchInput.press("Enter");
   }
 
   async openBeneficiary(beneficiaryName: string): Promise<void> {
@@ -148,7 +148,52 @@ export class EditBeneficiaryPage extends BasePage {
   }
 
   async openBeneficiaryByDocument(documentNumber: string): Promise<void> {
-    await this.page.getByText(documentNumber, { exact: false }).click();
+    await this.page.getByText(new RegExp(`\\b${documentNumber}\\b`)).click();
+  }
+
+  private async selectOption(
+    select: Locator,
+    optionName: string,
+  ): Promise<void> {
+    await select.click();
+    await this.page
+      .getByRole("option", { name: optionName, exact: true })
+      .click();
+  }
+
+  async selectDocumentType(documentType: string): Promise<void> {
+    await this.selectOption(this.documentTypeSelect, documentType);
+  }
+
+  async selectAcademicGrade(academicGrade: string): Promise<void> {
+    await this.selectOption(this.academicGradeSelect, academicGrade);
+  }
+
+  async selectPopulationType(populationType: string): Promise<void> {
+    await this.selectOption(this.populationTypeSelect, populationType);
+  }
+
+  async searchByDocument(documentNumber: string): Promise<Response> {
+    const responsePromise = this.page.waitForResponse((response) => {
+      const requestUrl = new URL(response.url());
+
+      return (
+        response.request().method() === "GET" &&
+        requestUrl.pathname ===
+          "/v1.0/beneficiaries/with-campuses-and-attendants" &&
+        requestUrl.searchParams.get("searchBar") === documentNumber
+      );
+    });
+
+    await this.searchMainBeneficiaries(documentNumber);
+    return responsePromise;
+  }
+
+  isUpdateBeneficiaryCall(url: string, method: string): boolean {
+    return (
+      method === "PATCH" &&
+      /^\/v1\.0\/beneficiaries\/\d+$/.test(new URL(url).pathname)
+    );
   }
 
   async associateAttendant(attendantName: string): Promise<void> {

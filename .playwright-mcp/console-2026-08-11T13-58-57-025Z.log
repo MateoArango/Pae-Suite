@@ -1,0 +1,31 @@
+[   -6761ms] [INFO] [OTel] Telemetría inicializada: https://otelcollector.adacsc.co @ https://pae-beta.adacsc.co/main-D4RPEK3S.js:157
+[   -6233ms] [LOG] GLOBAL CLICK: mdc-button__label @ https://pae-beta.adacsc.co/auth/login:27
+[   -5519ms] [LOG] [📌 Dashboard-Coordinador] Registering alert rail template (FIRST TIME ONLY) @ https://pae-beta.adacsc.co/chunk-S7RNCLXS.js:0
+[   -5516ms] [LOG] [DashboardAlertRailService] registerRailExpandedSetter invocado @ https://pae-beta.adacsc.co/chunk-XTMAG7HA.js:0
+[   14005ms] [LOG] GLOBAL CLICK: mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color @ https://pae-beta.adacsc.co/auth/login:27
+[   14640ms] [LOG] GLOBAL CLICK: material-symbols-rounded @ https://pae-beta.adacsc.co/auth/login:27
+[   14696ms] [LOG] [DashboardAlertRailService] forceExpandRail invocado con: false @ https://pae-beta.adacsc.co/chunk-XTMAG7HA.js:0
+[   14702ms] [LOG] [DashboardAlertRailService] forceExpandRail invocado con: false @ https://pae-beta.adacsc.co/chunk-XTMAG7HA.js:0
+[   24768ms] [LOG] GLOBAL CLICK: SPAN @ https://pae-beta.adacsc.co/auth/login:27
+[   33350ms] [LOG] [DashboardAlertRailService] forceExpandRail invocado con: true @ https://pae-beta.adacsc.co/chunk-XTMAG7HA.js:0
+[   33350ms] [LOG] [DashboardAlertRailService] forceExpandRail invocado con: true @ https://pae-beta.adacsc.co/chunk-XTMAG7HA.js:0
+[   33350ms] [LOG] GLOBAL CLICK: fab-menu-item-label @ https://pae-beta.adacsc.co/auth/login:27
+[   49078ms] [LOG] GLOBAL CLICK: mat-mdc-select-placeholder mat-mdc-select-min-line @ https://pae-beta.adacsc.co/auth/login:27
+[   57129ms] [LOG] GLOBAL CLICK: mat-option-4 @ https://pae-beta.adacsc.co/auth/login:27
+[   62973ms] [LOG] GLOBAL CLICK: mat-mdc-select-placeholder mat-mdc-select-min-line @ https://pae-beta.adacsc.co/auth/login:27
+[   68956ms] [LOG] GLOBAL CLICK: mat-option-16 @ https://pae-beta.adacsc.co/auth/login:27
+[   72931ms] [LOG] GLOBAL CLICK: mat-mdc-select-placeholder mat-mdc-select-min-line @ https://pae-beta.adacsc.co/auth/login:27
+[   81927ms] [LOG] GLOBAL CLICK: mat-option-2 @ https://pae-beta.adacsc.co/auth/login:27
+[   86023ms] [LOG] GLOBAL CLICK: mdc-button__label @ https://pae-beta.adacsc.co/auth/login:27
+[   86170ms] [LOG] [DashboardCoordinador] Evento showGlobalToast recibido: CustomEvent @ https://pae-beta.adacsc.co/chunk-S7RNCLXS.js:0
+[   86171ms] [LOG] [DashboardCoordinador] Toast global activado: true Mensaje: Beneficiario Benedit Automation creado exitosamente @ https://pae-beta.adacsc.co/chunk-S7RNCLXS.js:0
+[   86172ms] [LOG] [DashboardAlertRailService] forceExpandRail invocado con: false @ https://pae-beta.adacsc.co/chunk-XTMAG7HA.js:0
+[   94921ms] [LOG] GLOBAL CLICK: mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color @ https://pae-beta.adacsc.co/auth/login:27
+[  100449ms] [LOG] GLOBAL CLICK: mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color @ https://pae-beta.adacsc.co/auth/login:27
+[  117682ms] [LOG] [DashboardAlertRailService] forceExpandRail invocado con: true @ https://pae-beta.adacsc.co/chunk-XTMAG7HA.js:0
+[  117682ms] [LOG] [DashboardAlertRailService] forceExpandRail invocado con: true @ https://pae-beta.adacsc.co/chunk-XTMAG7HA.js:0
+[  117682ms] [LOG] GLOBAL CLICK: student-meta @ https://pae-beta.adacsc.co/auth/login:27
+[  117790ms] [LOG] [DEBUG] loadStudentData payload: {id: 594, name: Benedit Inicial Automation Original, documentNumber: 81120261359001, grade: 5-a, gradeNumber: 5} @ https://pae-beta.adacsc.co/chunk-TBUX77UE.js:0
+[  117835ms] [LOG] [DEBUG] getAllBeneficiaries response (initial load): {id: 594, fullName: Benedit Inicial Automation Original, firstName: Benedit, secondName: Inicial, firstSurname: Automation} @ https://pae-beta.adacsc.co/chunk-TBUX77UE.js:0
+[  125515ms] [LOG] GLOBAL CLICK: mat-mdc-button-touch-target @ https://pae-beta.adacsc.co/auth/login:27
+[  143975ms] [LOG] GLOBAL CLICK: mdc-button__label @ https://pae-beta.adacsc.co/auth/login:27

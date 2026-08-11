@@ -135,15 +135,7 @@
 3. Enter `´´+´+` as the CC document and complete the remaining required fields. - expect: CC sanitizes the invalid characters to an empty, invalid field while the Save button remains enabled.
 4. Click Save with the invalid CC document. - expect: The form remains open, no creation request is sent, and no success toast appears.
 
-#### 2.5. BEN-SINGLE-005 — Keep dependent schooling fields consistent -- NO ❌
-
-**File:** `tests/Beneficiary/register-beneficiary-dependent-fields.spec.ts`
-
-**Steps:**
-
-1. Open Registrar estudiante and inspect schooling fields before choosing a grade or preceding catalog value. - expect: Dependent controls are disabled or empty until their prerequisites are selected.
-2. Select prerequisite values, then choose valid dependent values. - expect: Only compatible options are offered.
-3. Change an upstream selection. - expect: Incompatible downstream values are cleared and must be selected again before submission.
+###
 
 #### 2.6. BEN-SINGLE-006 — Cancel registration and handle the delayed feedback overlay — Partial ✅
 
@@ -263,10 +255,10 @@
 
 **Steps:**
 
-1. Create a beneficiary with unique deterministic data and search for that beneficiary. - expect: Exactly one matching beneficiary is displayed.
-2. Open the beneficiary detail and enable editing. - expect: Editable personal and schooling controls become available with the current values retained.
-3. Change the first name, first surname, grade, group, and population type, then save once. - expect: Exactly one successful beneficiary-update request occurs and `El estudiante ha sido actualizado correctamente.` is displayed.
-4. Close, search for, and reopen the beneficiary. - expect: The saved values persist in the beneficiary detail.
+1. Create a beneficiary with unique data in every editable personal and schooling field. Reload, search only by its document number, and open that exact result. - expect: Exactly one matching beneficiary is displayed and every initial value is retained.
+2. Enable editing. For each field (first name, second name, first surname, second surname, document type, document number, grade, group, and population type), change only that field and save once. - expect: Each save sends exactly one successful `PATCH /v1.0/beneficiaries/{id}` request. The existing `updateSuccessToast` assertion remains commented with a system-correction TODO because the successful update currently displays no toast.
+3. After every individual save, reload the page, search only by the current document number, reopen the exact record, and enable editing again. - expect: The value just saved persists before the next field is changed. When the document number itself changes, all subsequent searches use the new number.
+4. After the final reload and document-number search, reopen the beneficiary. - expect: All nine final personal and schooling values persist together, and exactly nine update requests occurred.
 
 #### 4.2. BEN-EDIT-002 — Validate required fields while editing
 

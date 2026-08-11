@@ -1,0 +1,95 @@
+- generic [ref=e61]:
+  - generic [ref=e62]:
+    - button "M" [ref=e64]
+    - navigation [ref=e66]:
+      - button "home" [ref=e67]:
+        - generic [ref=e70]: home
+      - generic [ref=e73]: Inicio
+      - button "hand_package" [ref=e74]:
+        - generic [ref=e77]: hand_package
+      - generic [ref=e80]: Servicio
+      - button "solo_dining" [ref=e81]:
+        - generic [ref=e84]: solo_dining
+      - generic [ref=e87]: Beneficiarios
+      - button "receipt_long" [ref=e88]:
+        - generic [ref=e91]: receipt_long
+      - generic [ref=e94]: Reportes
+    - generic [ref=e95]:
+      - button "Abrir formulario de comentarios" [ref=e96] [cursor=pointer]:
+        - generic [ref=e97]: flag_2
+      - button "Cerrar sesión" [ref=e100] [cursor=pointer]:
+        - generic [ref=e101]: logout
+  - generic [ref=e104]:
+    - generic [ref=e105]:
+      - generic [ref=e109]:
+        - generic [ref=e110]: Buenos días, Mateo Ada
+        - generic [ref=e111]: "| -"
+      - generic [ref=e112]:
+        - generic [ref=e113] [cursor=pointer]:
+          - generic [ref=e114]: translate
+          - generic [ref=e115]: ES
+        - button "Aurora" [ref=e117] [cursor=pointer]:
+          - progressbar "Loading" [ref=e120]:
+            - img [ref=e121]
+          - generic [ref=e124]: Aurora
+        - button "Ver alertas" [ref=e125] [cursor=pointer]:
+          - generic [ref=e126]: notifications
+          - text: Ver alertas
+    - generic [ref=e408]:
+      - generic [ref=e409]:
+        - generic [ref=e410]:
+          - generic [ref=e411]:
+            - paragraph [ref=e412]: Beneficiarios
+            - paragraph [ref=e413]: "1"
+          - generic [ref=e415]:
+            - generic [ref=e416] [cursor=pointer]:
+              - generic [ref=e417]:
+                - text: "0"
+                - paragraph [ref=e418]: Enrolados
+              - generic [ref=e419]: north_east
+            - generic [ref=e420] [cursor=pointer]:
+              - generic [ref=e421]:
+                - text: "15"
+                - paragraph [ref=e422]: Acudientes
+              - generic [ref=e423]: north_east
+            - generic [ref=e424] [cursor=pointer]:
+              - generic [ref=e425]:
+                - text: "384"
+                - paragraph [ref=e426]: Sin enrolar
+              - generic [ref=e427]: north_east
+        - generic [ref=e428]:
+          - generic [ref=e432] [cursor=pointer]:
+            - generic [ref=e433]: Grado
+            - generic [ref=e434]: arrow_drop_down
+          - generic [ref=e438] [cursor=pointer]:
+            - generic [ref=e439]: Estado
+            - generic [ref=e440]: arrow_drop_down
+          - generic [ref=e445] [cursor=pointer]: Ausentes
+          - generic [ref=e446] [cursor=pointer]:
+            - text: Más recientes
+            - generic [ref=e447]: arrow_drop_down
+          - generic [ref=e448]:
+            - generic [ref=e817]:
+              - textbox "Buscar ..." [active] [ref=e818]: "81120261359001"
+              - button "Limpiar búsqueda" [ref=e823] [cursor=pointer]:
+                - img [ref=e820]: close
+            - generic [ref=e455]:
+              - paragraph [ref=e456]: 1 resultado
+              - paragraph [ref=e457]: 1 - 1 de 1 beneficiarios
+        - generic [ref=e783] [cursor=pointer]:
+          - generic [ref=e784]:
+            - generic [ref=e785]: BI
+            - generic [ref=e786]:
+              - heading "Benedit Inicial Automation Original" [level=3] [ref=e787]
+              - paragraph [ref=e788]: C.C. 81120261359001 • 5-a
+              - generic [ref=e790]: No enrolado
+          - button "Más opciones" [ref=e791]:
+            - generic [ref=e792]: chevron_forward
+      - generic [ref=e592]:
+        - button "Abrir menú de acciones" [expanded] [ref=e593] [cursor=pointer]:
+          - img [ref=e595]
+        - generic [ref=e598]:
+          - button "Registro único" [ref=e599] [cursor=pointer]:
+            - generic [ref=e600]: Registro único
+          - button "Registro masivo" [ref=e601] [cursor=pointer]:
+            - generic [ref=e602]: Registro masivo
